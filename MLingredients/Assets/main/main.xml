@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Scene id="root" xmlns="http://schema.smallplanet.com/PlanetUI">
+    <Constraint firstItem="root" ruleSet="fillSuperview" />
+    
+    <View id="background" backgroundColor="#EEEEEEFF" />
+    <Constraint firstItem="background" ruleSet="fillSuperview" />
+        
+    <Button id="predictButton" title="Predict" styleId="ButtonStd" />
+    <Constraint firstItem="predictButton" firstAttribute="width" constant="200"/>
+    <Constraint firstItem="predictButton" firstAttribute="height" constant="40"/>
+    <Constraint firstItem="predictButton" firstAttribute="left" secondItem="root" secondAttribute="left" constant="20" />
+    <Constraint firstItem="predictButton" firstAttribute="top" secondItem="root" secondAttribute="top" constant="100" />
+
+</Scene>

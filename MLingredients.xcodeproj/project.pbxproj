@@ -7,21 +7,51 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		465A19952073F80900FC8785 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465A19942073F80900FC8785 /* AppDelegate.swift */; };
-		465A19972073F80A00FC8785 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 465A19962073F80A00FC8785 /* ViewController.swift */; };
 		465A199A2073F80A00FC8785 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 465A19982073F80A00FC8785 /* Main.storyboard */; };
 		465A199C2073F80A00FC8785 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 465A199B2073F80A00FC8785 /* Assets.xcassets */; };
 		465A199F2073F80A00FC8785 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 465A199D2073F80A00FC8785 /* LaunchScreen.storyboard */; };
+		46DE635B2073FAAF00C998E3 /* PlanetSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46DE635C2073FAAF00C998E3 /* PlanetSwift.framework */; };
+		46DE635D2073FAC100C998E3 /* PlanetSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46DE635C2073FAAF00C998E3 /* PlanetSwift.framework */; };
+		46DE635E2073FAC100C998E3 /* PlanetSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 46DE635C2073FAAF00C998E3 /* PlanetSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		46DE6364207404FC00C998E3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46DE6361207404FC00C998E3 /* AppDelegate.swift */; };
+		46DE6365207404FC00C998E3 /* MainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46DE6363207404FC00C998E3 /* MainController.swift */; };
+		46DE63672074051C00C998E3 /* Assets in Resources */ = {isa = PBXBuildFile; fileRef = 46DE63662074051C00C998E3 /* Assets */; };
+		46DE636E2074058000C998E3 /* CameraCaptureHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46DE636A2074058000C998E3 /* CameraCaptureHelper.swift */; };
+		46DE636F2074058000C998E3 /* UIControl+Closures.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46DE636B2074058000C998E3 /* UIControl+Closures.swift */; };
+		46DE63702074058000C998E3 /* UIView+FillSuperview.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46DE636C2074058000C998E3 /* UIView+FillSuperview.swift */; };
+		46DE63712074058000C998E3 /* String+ASCII.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46DE636D2074058000C998E3 /* String+ASCII.swift */; };
+		46DE63742074058800C998E3 /* PredictController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46DE63732074058800C998E3 /* PredictController.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		46DE635F2073FAC100C998E3 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				46DE635E2073FAC100C998E3 /* PlanetSwift.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		465A19912073F80900FC8785 /* MLingredients.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MLingredients.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		465A19942073F80900FC8785 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		465A19962073F80A00FC8785 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		465A19992073F80A00FC8785 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		465A199B2073F80A00FC8785 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		465A199E2073F80A00FC8785 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		465A19A02073F80A00FC8785 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		46DE635C2073FAAF00C998E3 /* PlanetSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = PlanetSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		46DE6361207404FC00C998E3 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		46DE6363207404FC00C998E3 /* MainController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainController.swift; sourceTree = "<group>"; };
+		46DE63662074051C00C998E3 /* Assets */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Assets; sourceTree = "<group>"; };
+		46DE636A2074058000C998E3 /* CameraCaptureHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraCaptureHelper.swift; sourceTree = "<group>"; };
+		46DE636B2074058000C998E3 /* UIControl+Closures.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIControl+Closures.swift"; sourceTree = "<group>"; };
+		46DE636C2074058000C998E3 /* UIView+FillSuperview.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+FillSuperview.swift"; sourceTree = "<group>"; };
+		46DE636D2074058000C998E3 /* String+ASCII.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+ASCII.swift"; sourceTree = "<group>"; };
+		46DE63732074058800C998E3 /* PredictController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PredictController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,6 +59,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				46DE635D2073FAC100C998E3 /* PlanetSwift.framework in Frameworks */,
+				46DE635B2073FAAF00C998E3 /* PlanetSwift.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -40,6 +72,7 @@
 			children = (
 				465A19932073F80900FC8785 /* MLingredients */,
 				465A19922073F80900FC8785 /* Products */,
+				46DE635A2073FAAF00C998E3 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -54,14 +87,52 @@
 		465A19932073F80900FC8785 /* MLingredients */ = {
 			isa = PBXGroup;
 			children = (
-				465A19942073F80900FC8785 /* AppDelegate.swift */,
-				465A19962073F80A00FC8785 /* ViewController.swift */,
+				46DE63662074051C00C998E3 /* Assets */,
+				46DE6360207404FC00C998E3 /* Source */,
 				465A19982073F80A00FC8785 /* Main.storyboard */,
 				465A199B2073F80A00FC8785 /* Assets.xcassets */,
 				465A199D2073F80A00FC8785 /* LaunchScreen.storyboard */,
 				465A19A02073F80A00FC8785 /* Info.plist */,
 			);
 			path = MLingredients;
+			sourceTree = "<group>";
+		};
+		46DE635A2073FAAF00C998E3 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				46DE635C2073FAAF00C998E3 /* PlanetSwift.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		46DE6360207404FC00C998E3 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				46DE6361207404FC00C998E3 /* AppDelegate.swift */,
+				46DE636A2074058000C998E3 /* CameraCaptureHelper.swift */,
+				46DE636D2074058000C998E3 /* String+ASCII.swift */,
+				46DE636B2074058000C998E3 /* UIControl+Closures.swift */,
+				46DE636C2074058000C998E3 /* UIView+FillSuperview.swift */,
+				46DE63722074058800C998E3 /* predict */,
+				46DE6362207404FC00C998E3 /* main */,
+			);
+			path = Source;
+			sourceTree = "<group>";
+		};
+		46DE6362207404FC00C998E3 /* main */ = {
+			isa = PBXGroup;
+			children = (
+				46DE6363207404FC00C998E3 /* MainController.swift */,
+			);
+			path = main;
+			sourceTree = "<group>";
+		};
+		46DE63722074058800C998E3 /* predict */ = {
+			isa = PBXGroup;
+			children = (
+				46DE63732074058800C998E3 /* PredictController.swift */,
+			);
+			path = predict;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -74,6 +145,7 @@
 				465A198D2073F80900FC8785 /* Sources */,
 				465A198E2073F80900FC8785 /* Frameworks */,
 				465A198F2073F80900FC8785 /* Resources */,
+				46DE635F2073FAC100C998E3 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -124,6 +196,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				465A199F2073F80A00FC8785 /* LaunchScreen.storyboard in Resources */,
+				46DE63672074051C00C998E3 /* Assets in Resources */,
 				465A199C2073F80A00FC8785 /* Assets.xcassets in Resources */,
 				465A199A2073F80A00FC8785 /* Main.storyboard in Resources */,
 			);
@@ -136,8 +209,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				465A19972073F80A00FC8785 /* ViewController.swift in Sources */,
-				465A19952073F80900FC8785 /* AppDelegate.swift in Sources */,
+				46DE636E2074058000C998E3 /* CameraCaptureHelper.swift in Sources */,
+				46DE636F2074058000C998E3 /* UIControl+Closures.swift in Sources */,
+				46DE63702074058000C998E3 /* UIView+FillSuperview.swift in Sources */,
+				46DE6365207404FC00C998E3 /* MainController.swift in Sources */,
+				46DE63712074058000C998E3 /* String+ASCII.swift in Sources */,
+				46DE6364207404FC00C998E3 /* AppDelegate.swift in Sources */,
+				46DE63742074058800C998E3 /* PredictController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
