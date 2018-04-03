@@ -2,6 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
+      location = "group:PlanetSwift/PlanetSwift.xcodeproj">
+   </FileRef>
+   <FileRef
       location = "group:MLingredients.xcodeproj">
    </FileRef>
 </Workspace>
