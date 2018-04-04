@@ -13,12 +13,19 @@ class MainController: PlanetViewController {
         
         UIApplication.shared.isIdleTimerDisabled = true
         
+        trainButton.button.add(for: .touchUpInside) {
+            self.navigationController?.pushViewController(TrainController(), animated: true)
+        }
+        
         predictButton.button.add(for: .touchUpInside) {
             self.navigationController?.pushViewController(PredictController(), animated: true)
         }
     }
     fileprivate var predictButton: Button {
         return mainXmlView!.elementForId("predictButton")!.asButton!
+    }
+    fileprivate var trainButton: Button {
+        return mainXmlView!.elementForId("trainButton")!.asButton!
     }
 
 }

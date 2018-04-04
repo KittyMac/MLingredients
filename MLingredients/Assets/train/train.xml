@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Scene id="root" xmlns="http://schema.smallplanet.com/PlanetUI">
+    <Constraint firstItem="root" ruleSet="fillSuperview" />
+    
+    <View id="background" backgroundColor="#EEEEEEFF" />
+    <Constraint firstItem="background" ruleSet="fillSuperview" />
+    
+    <ImageView id="preview" contentMode="scaleToFill" backgroundColor="#000000FF" shadowRadius="4" shadowOffset="0,3" shadowColor="#000000FF" shadowOpacity="0.5" />
+    <Constraint firstItem="preview" firstAttribute="width" secondItem="root" secondAttribute="width" multiplier="1.0"/>
+    <Constraint firstItem="preview" firstAttribute="height" secondItem="root" secondAttribute="height" multiplier="0.5"/>
+    <Constraint firstItem="preview" firstAttribute="top" secondItem="root" secondAttribute="top" constant="60" />
+    
+    <Label id="predictionLabel" styleId="PredictionLabel" numberOfLines="1" />
+    <Constraint firstItem="predictionLabel" firstAttribute="width" constant="80"/>
+    <Constraint firstItem="predictionLabel" firstAttribute="height" constant="40"/>
+    <Constraint firstItem="predictionLabel" firstAttribute="top" secondItem="preview" secondAttribute="top" />
+    <Constraint firstItem="predictionLabel" firstAttribute="left" secondItem="preview" secondAttribute="left" />
+
+    
+    <Button id="nextObservation" title="->" styleId="ButtonStd" />
+    <Constraint firstItem="nextObservation" firstAttribute="width" constant="60"/>
+    <Constraint firstItem="nextObservation" firstAttribute="height" constant="60"/>
+    <Constraint firstItem="nextObservation" firstAttribute="top" secondItem="preview" secondAttribute="bottom" constant="10" />
+    <Constraint firstItem="nextObservation" firstAttribute="left" secondItem="root" secondAttribute="left" constant="10"/>
+
+    
+    <!--
+    <StackView id="stack1" backgroundColor="#CCCCCCFF" distribution="equalSpacing" alignment="top" >
+        <Button id="width_minus" title="w-" styleId="ButtonStd" />
+        <Constraint firstItem="width_minus" firstAttribute="width" constant="60"/>
+        <Constraint firstItem="width_minus" firstAttribute="height" constant="60"/>
+        
+        <Button id="width_plus" title="w+" styleId="ButtonStd" />
+        <Constraint firstItem="width_plus" firstAttribute="width" constant="60"/>
+        <Constraint firstItem="width_plus" firstAttribute="height" constant="60"/>
+        
+        <Button id="height_minus" title="h-" styleId="ButtonStd" />
+        <Constraint firstItem="height_minus" firstAttribute="width" constant="60"/>
+        <Constraint firstItem="height_minus" firstAttribute="height" constant="60"/>
+        
+        <Button id="height_plus" title="h+" styleId="ButtonStd" />
+        <Constraint firstItem="height_plus" firstAttribute="width" constant="60"/>
+        <Constraint firstItem="height_plus" firstAttribute="height" constant="60"/>
+    </StackView>
+    <Constraint firstItem="stack1" firstAttribute="top" secondItem="preview" secondAttribute="bottom" constant="10" />
+    <Constraint firstItem="stack1" firstAttribute="left" secondItem="root" secondAttribute="left" constant="10"/>
+    <Constraint firstItem="stack1" firstAttribute="right" secondItem="root" secondAttribute="right" constant="-10"/>
+    <Constraint firstItem="stack1" firstAttribute="height" constant="60" />
+    
+        
+    <StackView id="stack2" backgroundColor="#CCCCCCFF" distribution="equalSpacing" alignment="top" >
+        <Button id="x_minus" title="x-" styleId="ButtonStd" />
+        <Constraint firstItem="x_minus" firstAttribute="width" constant="60"/>
+        <Constraint firstItem="x_minus" firstAttribute="height" constant="60"/>
+        
+        <Button id="x_plus" title="x+" styleId="ButtonStd" />
+        <Constraint firstItem="x_plus" firstAttribute="width" constant="60"/>
+        <Constraint firstItem="x_plus" firstAttribute="height" constant="60"/>
+        
+        <Button id="y_minus" title="y-" styleId="ButtonStd" />
+        <Constraint firstItem="y_minus" firstAttribute="width" constant="60"/>
+        <Constraint firstItem="y_minus" firstAttribute="height" constant="60"/>
+        
+        <Button id="y_plus" title="y+" styleId="ButtonStd" />
+        <Constraint firstItem="y_plus" firstAttribute="width" constant="60"/>
+        <Constraint firstItem="y_plus" firstAttribute="height" constant="60"/>
+    </StackView>
+    <Constraint firstItem="stack2" firstAttribute="top" secondItem="stack1" secondAttribute="bottom" constant="10" />
+    <Constraint firstItem="stack2" firstAttribute="left" secondItem="root" secondAttribute="left" constant="10"/>
+    <Constraint firstItem="stack2" firstAttribute="right" secondItem="root" secondAttribute="right" constant="-10"/>
+    <Constraint firstItem="stack2" firstAttribute="height" constant="60" />
+    
+    
+    <StackView id="stack3" backgroundColor="#CCCCCCFF" distribution="equalSpacing" alignment="top" >
+        <Button id="z_minus" title="z-" styleId="ButtonStd" />
+        <Constraint firstItem="z_minus" firstAttribute="width" constant="60"/>
+        <Constraint firstItem="z_minus" firstAttribute="height" constant="60"/>
+        
+        <Button id="z_plus" title="z+" styleId="ButtonStd" />
+        <Constraint firstItem="z_plus" firstAttribute="width" constant="60"/>
+        <Constraint firstItem="z_plus" firstAttribute="height" constant="60"/>
+        
+        <Button id="rot_minus" title="rot-" styleId="ButtonStd" />
+        <Constraint firstItem="rot_minus" firstAttribute="width" constant="60"/>
+        <Constraint firstItem="rot_minus" firstAttribute="height" constant="60"/>
+        
+        <Button id="rot_plus" title="rot+" styleId="ButtonStd" />
+        <Constraint firstItem="rot_plus" firstAttribute="width" constant="60"/>
+        <Constraint firstItem="rot_plus" firstAttribute="height" constant="60"/>
+    </StackView>
+    <Constraint firstItem="stack3" firstAttribute="top" secondItem="stack2" secondAttribute="bottom" constant="10" />
+    <Constraint firstItem="stack3" firstAttribute="left" secondItem="root" secondAttribute="left" constant="10"/>
+    <Constraint firstItem="stack3" firstAttribute="right" secondItem="root" secondAttribute="right" constant="-10"/>
+    <Constraint firstItem="stack3" firstAttribute="height" constant="60" />
+    
+    
+    
+    
+    <StackView id="stack4" backgroundColor="#CCCCCCFF" distribution="equalSpacing" alignment="top" >
+        <Button id="submit0" title="0" styleId="ButtonStd" />
+        <Constraint firstItem="submit0" firstAttribute="width" constant="60"/>
+        <Constraint firstItem="submit0" firstAttribute="height" constant="60"/>
+        
+        <Button id="submit1" title="1" styleId="ButtonStd" />
+        <Constraint firstItem="submit1" firstAttribute="width" constant="60"/>
+        <Constraint firstItem="submit1" firstAttribute="height" constant="60"/>
+        
+        <Button id="submit2" title="2" styleId="ButtonStd" />
+        <Constraint firstItem="submit2" firstAttribute="width" constant="60"/>
+        <Constraint firstItem="submit2" firstAttribute="height" constant="60"/>
+        
+        <Button id="submit3" title="3" styleId="ButtonStd" />
+        <Constraint firstItem="submit3" firstAttribute="width" constant="60"/>
+        <Constraint firstItem="submit3" firstAttribute="height" constant="60"/>
+        
+        <Button id="submit4" title="4" styleId="ButtonStd" />
+        <Constraint firstItem="submit4" firstAttribute="width" constant="60"/>
+        <Constraint firstItem="submit4" firstAttribute="height" constant="60"/>
+        
+        <Button id="submit5" title="5" styleId="ButtonStd" />
+        <Constraint firstItem="submit5" firstAttribute="width" constant="60"/>
+        <Constraint firstItem="submit5" firstAttribute="height" constant="60"/>
+        
+    </StackView>
+    <Constraint firstItem="stack4" firstAttribute="top" secondItem="stack3" secondAttribute="bottom" constant="15" />
+    <Constraint firstItem="stack4" firstAttribute="left" secondItem="root" secondAttribute="left" constant="10"/>
+    <Constraint firstItem="stack4" firstAttribute="right" secondItem="root" secondAttribute="right" constant="-10"/>
+    <Constraint firstItem="stack4" firstAttribute="height" constant="60" />
+     
+     -->
+</Scene>

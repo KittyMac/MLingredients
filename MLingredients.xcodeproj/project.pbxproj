@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4640B7A22075673C002A6EA1 /* TrainController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4640B7A12075673C002A6EA1 /* TrainController.swift */; };
 		465A199A2073F80A00FC8785 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 465A19982073F80A00FC8785 /* Main.storyboard */; };
 		465A199C2073F80A00FC8785 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 465A199B2073F80A00FC8785 /* Assets.xcassets */; };
 		465A199F2073F80A00FC8785 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 465A199D2073F80A00FC8785 /* LaunchScreen.storyboard */; };
@@ -38,6 +39,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		4640B7A12075673C002A6EA1 /* TrainController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrainController.swift; sourceTree = "<group>"; };
 		465A19912073F80900FC8785 /* MLingredients.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MLingredients.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		465A19992073F80A00FC8785 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		465A199B2073F80A00FC8785 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -67,6 +69,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4640B7A02075673C002A6EA1 /* train */ = {
+			isa = PBXGroup;
+			children = (
+				4640B7A12075673C002A6EA1 /* TrainController.swift */,
+			);
+			path = train;
+			sourceTree = "<group>";
+		};
 		465A19882073F80900FC8785 = {
 			isa = PBXGroup;
 			children = (
@@ -113,6 +123,7 @@
 				46DE636D2074058000C998E3 /* String+ASCII.swift */,
 				46DE636B2074058000C998E3 /* UIControl+Closures.swift */,
 				46DE636C2074058000C998E3 /* UIView+FillSuperview.swift */,
+				4640B7A02075673C002A6EA1 /* train */,
 				46DE63722074058800C998E3 /* predict */,
 				46DE6362207404FC00C998E3 /* main */,
 			);
@@ -211,6 +222,7 @@
 			files = (
 				46DE636E2074058000C998E3 /* CameraCaptureHelper.swift in Sources */,
 				46DE636F2074058000C998E3 /* UIControl+Closures.swift in Sources */,
+				4640B7A22075673C002A6EA1 /* TrainController.swift in Sources */,
 				46DE63702074058000C998E3 /* UIView+FillSuperview.swift in Sources */,
 				46DE6365207404FC00C998E3 /* MainController.swift in Sources */,
 				46DE63712074058000C998E3 /* String+ASCII.swift in Sources */,

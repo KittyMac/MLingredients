@@ -5,10 +5,16 @@
     <View id="background" backgroundColor="#EEEEEEFF" />
     <Constraint firstItem="background" ruleSet="fillSuperview" />
         
-    <Button id="predictButton" title="Predict" styleId="ButtonStd" />
-    <Constraint firstItem="predictButton" firstAttribute="width" constant="200"/>
-    <Constraint firstItem="predictButton" firstAttribute="height" constant="40"/>
-    <Constraint firstItem="predictButton" firstAttribute="left" secondItem="root" secondAttribute="left" constant="20" />
-    <Constraint firstItem="predictButton" firstAttribute="top" secondItem="root" secondAttribute="top" constant="100" />
+        <Button id="trainButton" title="Train" styleId="ButtonStd" />
+        <Constraint firstItem="trainButton" firstAttribute="width" constant="200"/>
+        <Constraint firstItem="trainButton" firstAttribute="height" constant="40"/>
+        <Constraint firstItem="trainButton" firstAttribute="left" secondItem="root" secondAttribute="left" constant="20" />
+        <Constraint firstItem="trainButton" firstAttribute="top" secondItem="root" secondAttribute="top" constant="100" />
+        
+        <Button id="predictButton" title="Predict" styleId="ButtonStd" />
+        <Constraint firstItem="predictButton" firstAttribute="width" constant="200"/>
+        <Constraint firstItem="predictButton" firstAttribute="height" constant="40"/>
+        <Constraint firstItem="predictButton" firstAttribute="left" secondItem="root" secondAttribute="left" constant="20" />
+        <Constraint firstItem="predictButton" firstAttribute="top" secondItem="trainButton" secondAttribute="bottom" constant="20" />
 
 </Scene>

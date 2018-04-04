@@ -10,6 +10,40 @@ class PredictController: PlanetViewController, CameraCaptureHelperDelegate {
     var overrideImage:CIImage? = nil
     let ciContext = CIContext(options: [:])
     var lastOriginalImage:CIImage? = nil
+    
+    var lastImageUsedForObservations:CIImage? = nil
+    var observationsToProcess:[Any?] = []
+    
+    
+    func showCurrentObservation() {
+        if observationsToProcess.count == 0 {
+            return
+        }
+        
+        let perspectiveImagesCoords = self.observationsToProcess[0]
+        if perspectiveImagesCoords == nil {
+            showCurrentObservation()
+            return
+        }
+        
+        DispatchQueue.main.async {
+            let extractedImage = self.lastOriginalImage!.applyingFilter("CIPerspectiveCorrection", parameters: perspectiveImagesCoords as! [String : Any])
+            self.preview.imageView.image = UIImage(ciImage: extractedImage)
+        }
+    }
+    
+    func goToNextObservation() {
+        DispatchQueue.main.async {
+            let perspectiveImagesCoords = self.observationsToProcess[0]
+            let extractedImage = self.lastOriginalImage!.applyingFilter("CIPerspectiveCorrection", parameters: perspectiveImagesCoords as! [String : Any])
+            self.preview.imageView.image = UIImage(ciImage: extractedImage)
+        }
+    }
+    
+    func clearObservations() {
+        observationsToProcess.removeAll()
+        lastImageUsedForObservations = nil
+    }
 
     
     func playCameraImage(_ cameraCaptureHelper: CameraCaptureHelper, image: CIImage, originalImage: CIImage, frameNumber:Int, fps:Int) {
@@ -20,64 +54,64 @@ class PredictController: PlanetViewController, CameraCaptureHelperDelegate {
                 lastOriginalImage = originalImage
             }
             
-            //DispatchQueue.main.async {
-            //    self.preview.imageView.image = UIImage(ciImage: self.lastOriginalImage!)
-            //}
-            
-            
-            //let convertedImage = image |> adjustColors |> convertToGrayscale
-            let handler = VNImageRequestHandler(ciImage: self.lastOriginalImage!)
-            let request: VNDetectTextRectanglesRequest =
-                VNDetectTextRectanglesRequest(completionHandler: { [unowned self] (request, error) in
-                    if (error != nil) {
-                        print("Got Error In Run Text Dectect Request :(")
-                    } else {
-                        guard let results = request.results as? Array<VNTextObservation> else {
-                            fatalError("Unexpected result type from VNDetectTextRectanglesRequest")
-                        }
-                        if (results.count == 0) {
-                            return
-                        }
-                        
-                        
-                        var numberOfWords = 0
-                        for textObservation in results {
-                            var numberOfCharacters = 0
-                            for rectangleObservation in textObservation.characterBoxes! {
-                                
-                                if numberOfWords == 0 && numberOfCharacters == 0 {
-                                    let w = self.lastOriginalImage!.extent.width
-                                    let h = self.lastOriginalImage!.extent.height
+            if observationsToProcess.count == 0 {
+                
+                //let convertedImage = image |> adjustColors |> convertToGrayscale
+                let handler = VNImageRequestHandler(ciImage: self.lastOriginalImage!)
+                let request: VNDetectTextRectanglesRequest =
+                    VNDetectTextRectanglesRequest(completionHandler: { [unowned self] (request, error) in
+                        if (error != nil) {
+                            print("Got Error In Run Text Dectect Request :(")
+                        } else {
+                            guard let results = request.results as? Array<VNTextObservation> else {
+                                fatalError("Unexpected result type from VNDetectTextRectanglesRequest")
+                            }
+                            if (results.count == 0) {
+                                return
+                            }
+                            
+                            self.clearObservations()
+                            
+                            self.lastImageUsedForObservations = self.lastOriginalImage
+                            
+                            var numberOfWords = 0
+                            for textObservation in results {
+                                var numberOfCharacters = 0
+                                for rectangleObservation in textObservation.characterBoxes! {
                                     
-                                    let perspectiveImagesCoords = [
-                                        "inputTopLeft":CIVector(x:rectangleObservation.topLeft.x * w, y: rectangleObservation.topLeft.y * h),
-                                        "inputTopRight":CIVector(x:rectangleObservation.topRight.x * w, y: rectangleObservation.topRight.y * h),
-                                        "inputBottomLeft":CIVector(x:rectangleObservation.bottomLeft.x * w, y: rectangleObservation.bottomLeft.y * h),
-                                        "inputBottomRight":CIVector(x:rectangleObservation.bottomRight.x * w, y: rectangleObservation.bottomRight.y * h),
-                                        ]
-                                    
-                                    DispatchQueue.main.async {
-                                        print(perspectiveImagesCoords)
-                                        let extractedImage = self.lastOriginalImage!.applyingFilter("CIPerspectiveCorrection", parameters: perspectiveImagesCoords)
-                                        print(extractedImage)
-                                        self.preview.imageView.image = UIImage(ciImage: extractedImage)
+                                    if numberOfWords == 0 && numberOfCharacters == 0 {
+                                        let w = self.lastOriginalImage!.extent.width
+                                        let h = self.lastOriginalImage!.extent.height
+                                        
+                                        let perspectiveImagesCoords = [
+                                            "inputTopLeft":CIVector(x:rectangleObservation.topLeft.x * w, y: rectangleObservation.topLeft.y * h),
+                                            "inputTopRight":CIVector(x:rectangleObservation.topRight.x * w, y: rectangleObservation.topRight.y * h),
+                                            "inputBottomLeft":CIVector(x:rectangleObservation.bottomLeft.x * w, y: rectangleObservation.bottomLeft.y * h),
+                                            "inputBottomRight":CIVector(x:rectangleObservation.bottomRight.x * w, y: rectangleObservation.bottomRight.y * h),
+                                            ]
+                                        
+                                        self.observationsToProcess.append(perspectiveImagesCoords)
                                     }
+                                    
+                                    numberOfCharacters += 1
                                 }
                                 
-                                numberOfCharacters += 1
+                                self.observationsToProcess.append(nil)
+                                numberOfWords += 1
                             }
-                            numberOfWords += 1
+                            
+                            self.showCurrentObservation()
+                            
+                            print("\(numberOfWords)")
                         }
-                        
-                        print("\(numberOfWords)")
-                        
-                    }
-                })
-            request.reportCharacterBoxes = true
-            do {
-                try handler.perform([request])
-            } catch {
-                print(error)
+                    })
+                request.reportCharacterBoxes = true
+                do {
+                    try handler.perform([request])
+                } catch {
+                    print(error)
+                }
+                
             }
 
             
@@ -136,6 +170,8 @@ class PredictController: PlanetViewController, CameraCaptureHelperDelegate {
         }
         let filePath = String(format:"bundle://Assets/predict/debug/IMG_%04d.JPG", currentOverrideImageIndex)
         overrideImage = CIImage(contentsOf: URL(fileURLWithPath: String(bundlePath: filePath)))
+        
+        clearObservations()
     }
     
     @objc func SaveImages(_ sender: UITapGestureRecognizer) {
