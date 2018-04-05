@@ -50,7 +50,7 @@ class TrainController: PlanetViewController, CameraCaptureHelperDelegate {
                     return
                 }
                 
-                self.predictionLabel.label.text = "\"\(results[0].identifier)\""
+                self.predictionLabel.label.text = "\"\(results[0].identifier)\" \(Int(results[0].confidence * 10.0))"
                 
             } catch {
                 print(error)
@@ -82,6 +82,11 @@ class TrainController: PlanetViewController, CameraCaptureHelperDelegate {
             
             if observationsToProcess.count == 0 {
                 
+                DispatchQueue.main.async {
+                    self.preview.imageView.image = UIImage(ciImage: self.lastOriginalImage!)
+                }
+
+                
                 //let convertedImage = image |> adjustColors |> convertToGrayscale
                 let handler = VNImageRequestHandler(ciImage: self.lastOriginalImage!)
                 let request: VNDetectTextRectanglesRequest =
@@ -100,33 +105,66 @@ class TrainController: PlanetViewController, CameraCaptureHelperDelegate {
                             
                             self.lastImageUsedForObservations = self.lastOriginalImage
                             
-                            var numberOfWords = 0
+                            var avgAspect:CGFloat = 0
+                            var numAspect:CGFloat = 0
                             for textObservation in results {
-                                var numberOfCharacters = 0
                                 for rectangleObservation in textObservation.characterBoxes! {
+                                    let charW = rectangleObservation.bottomRight.x - rectangleObservation.bottomLeft.x
+                                    let charH = rectangleObservation.topRight.y - rectangleObservation.bottomRight.y
+                                    let charAspect = charW/charH
+                                    
+                                    // sanity assumption for single character aspect
+                                    if charAspect < 1.4 {
+                                        avgAspect += charAspect
+                                        numAspect += 1.0
+                                    }
+                                }
+                            }
+                            avgAspect /= numAspect
+                            
+                            
+                            for textObservation in results {
+                                for rectangleObservation in textObservation.characterBoxes! {
+                                    
+                                    // TODO: try and detect when the vision detected more than one character in
+                                    // a box. We can try this simply by checking what the aspect ratio of the ractangle
+                                    // is; if its too wide perhaps it is 2 or 3 characters in the box
                                     
                                     let w = self.lastOriginalImage!.extent.width
                                     let h = self.lastOriginalImage!.extent.height
                                     
-                                    let perspectiveImagesCoords = [
-                                        "inputTopLeft":CIVector(x:rectangleObservation.topLeft.x * w, y: rectangleObservation.topLeft.y * h),
-                                        "inputTopRight":CIVector(x:rectangleObservation.topRight.x * w, y: rectangleObservation.topRight.y * h),
-                                        "inputBottomLeft":CIVector(x:rectangleObservation.bottomLeft.x * w, y: rectangleObservation.bottomLeft.y * h),
-                                        "inputBottomRight":CIVector(x:rectangleObservation.bottomRight.x * w, y: rectangleObservation.bottomRight.y * h),
-                                        ]
                                     
-                                    self.observationsToProcess.append(perspectiveImagesCoords)
+                                    let charW = rectangleObservation.bottomRight.x - rectangleObservation.bottomLeft.x
+                                    let charH = rectangleObservation.topRight.y - rectangleObservation.bottomRight.y
+                                    let charAspect = charW/charH
                                     
-                                    numberOfCharacters += 1
+                                    let subdivisions = Int(round(charAspect / avgAspect))
+                                    
+                                    //print("\(subdivisions) \(charAspect)        \(avgAspect)")
+                                    
+                                    var charX = rectangleObservation.bottomLeft.x
+                                    
+                                    let deltaW = charW / CGFloat(subdivisions)
+                                    
+                                    for _ in 0..<subdivisions {
+                                        
+                                        let perspectiveImagesCoords = [
+                                            "inputTopLeft":CIVector(x:(charX + 0) * w, y: rectangleObservation.topLeft.y * h),
+                                            "inputTopRight":CIVector(x:(charX + deltaW) * w, y: rectangleObservation.topRight.y * h),
+                                            "inputBottomLeft":CIVector(x:(charX + 0) * w, y: rectangleObservation.bottomLeft.y * h),
+                                            "inputBottomRight":CIVector(x:(charX + deltaW) * w, y: rectangleObservation.bottomRight.y * h),
+                                            ]
+                                        
+                                        self.observationsToProcess.append(perspectiveImagesCoords)
+                                        
+                                        charX += deltaW
+                                    }
                                 }
                                 
                                 self.observationsToProcess.append(nil)
-                                numberOfWords += 1
                             }
                             
                             self.showCurrentObservation()
-                            
-                            print("\(numberOfWords)")
                         }
                     })
                 request.reportCharacterBoxes = true
@@ -159,14 +197,14 @@ class TrainController: PlanetViewController, CameraCaptureHelperDelegate {
     }
     
     
-    var currentOverrideImageIndex = 1
+    var currentOverrideImageIndex = 0
     
     override func viewDidLoad() {
         title = "Train"
         mainBundlePath = "bundle://Assets/train/train.xml"
         loadView()
         
-        overrideImage = CIImage(contentsOf: URL(fileURLWithPath: String(bundlePath: "bundle://Assets/predict/debug/IMG_0026c.JPG")))
+        overrideImage = CIImage(contentsOf: URL(fileURLWithPath: String(bundlePath: "bundle://Assets/predict/debug/IMG_0001.JPG")))
         
         if(overrideImage != nil) {
             navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Next", style: .plain, target: self, action: #selector(nextOverrideImage))
@@ -244,6 +282,7 @@ class TrainController: PlanetViewController, CameraCaptureHelperDelegate {
             dataPacket.append(pngData)
             try! self.trainingImagesPublisher?.send(data: dataPacket)
             
+            self.goToNextObservation()
         }
 
         buttonsContainer.view.addSubview(btn.button)
@@ -252,12 +291,22 @@ class TrainController: PlanetViewController, CameraCaptureHelperDelegate {
     }
     
     @objc func nextOverrideImage() {
-        currentOverrideImageIndex += 1
-        if currentOverrideImageIndex > 17 {
-            currentOverrideImageIndex = 0
+        
+        do {
+            let debugUrl = URL(fileURLWithPath: String(bundlePath: "bundle://Assets/predict/debug/"))
+
+            let fileURLs = try FileManager.default.contentsOfDirectory(at: debugUrl, includingPropertiesForKeys: nil)
+            
+            currentOverrideImageIndex += 1
+            if currentOverrideImageIndex > fileURLs.count {
+                currentOverrideImageIndex = 0
+            }
+            
+            overrideImage = CIImage(contentsOf: fileURLs[currentOverrideImageIndex])
+            
+        } catch {
+            print("Error going to next debug image")
         }
-        let filePath = String(format:"bundle://Assets/predict/debug/IMG_%04d.JPG", currentOverrideImageIndex)
-        overrideImage = CIImage(contentsOf: URL(fileURLWithPath: String(bundlePath: filePath)))
         
         clearObservations()
     }
