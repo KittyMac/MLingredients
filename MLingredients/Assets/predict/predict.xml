@@ -5,7 +5,7 @@
     <View id="background" backgroundColor="#EEEEEEFF" />
     <Constraint firstItem="background" ruleSet="fillSuperview" />
     
-    <ImageView id="preview" contentMode="scaleToFill" backgroundColor="#000000FF" shadowRadius="4" shadowOffset="0,3" shadowColor="#000000FF" shadowOpacity="0.5" />
+    <ImageView id="preview" contentMode="scaleAspectFit" backgroundColor="#000000FF" shadowRadius="4" shadowOffset="0,3" shadowColor="#000000FF" shadowOpacity="0.5" />
     <Constraint firstItem="preview" firstAttribute="width" secondItem="root" secondAttribute="width" multiplier="1.0"/>
     <Constraint firstItem="preview" firstAttribute="height" secondItem="root" secondAttribute="height" constant="-150"/>
     <Constraint firstItem="preview" firstAttribute="top" secondItem="root" secondAttribute="top" constant="60" />

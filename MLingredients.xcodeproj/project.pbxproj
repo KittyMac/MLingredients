@@ -22,6 +22,7 @@
 		466900D82076798500A95F99 /* ZeroMQError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466900CB2076798500A95F99 /* ZeroMQError.swift */; };
 		466900DA207679A000A95F99 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 466900D9207679A000A95F99 /* libc++.tbd */; };
 		466900DC2076843700A95F99 /* Object+Rocco.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466900DB2076843700A95F99 /* Object+Rocco.swift */; };
+		466900DE2076C3F600A95F99 /* SharedController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466900DD2076C3F600A95F99 /* SharedController.swift */; };
 		46DE635D2073FAC100C998E3 /* PlanetSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46DE635C2073FAAF00C998E3 /* PlanetSwift.framework */; };
 		46DE635E2073FAC100C998E3 /* PlanetSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 46DE635C2073FAAF00C998E3 /* PlanetSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		46DE6364207404FC00C998E3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46DE6361207404FC00C998E3 /* AppDelegate.swift */; };
@@ -72,6 +73,7 @@
 		466900CC2076798500A95F99 /* zmq.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zmq.h; sourceTree = "<group>"; };
 		466900D9207679A000A95F99 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
 		466900DB2076843700A95F99 /* Object+Rocco.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Object+Rocco.swift"; sourceTree = "<group>"; };
+		466900DD2076C3F600A95F99 /* SharedController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SharedController.swift; sourceTree = "<group>"; };
 		46DE635C2073FAAF00C998E3 /* PlanetSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = PlanetSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		46DE6361207404FC00C998E3 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		46DE6363207404FC00C998E3 /* MainController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainController.swift; sourceTree = "<group>"; };
@@ -100,6 +102,7 @@
 		4640B7A02075673C002A6EA1 /* train */ = {
 			isa = PBXGroup;
 			children = (
+				466900DD2076C3F600A95F99 /* SharedController.swift */,
 				4640B7A12075673C002A6EA1 /* TrainController.swift */,
 			);
 			path = train;
@@ -289,6 +292,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				466900DE2076C3F600A95F99 /* SharedController.swift in Sources */,
 				466900CD2076798500A95F99 /* Comm.swift in Sources */,
 				46DE636E2074058000C998E3 /* CameraCaptureHelper.swift in Sources */,
 				46DE636F2074058000C998E3 /* UIControl+Closures.swift in Sources */,
