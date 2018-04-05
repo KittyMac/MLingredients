@@ -38,21 +38,22 @@ def four_point_transform(image, pts, size):
  
 	return warped
 
-def GenerateImage(text, img_w=model.IMG_SIZE[1], img_h=model.IMG_SIZE[0]):	
+def GenerateImage(text, fontIdx=0, img_w=model.IMG_SIZE[1], img_h=model.IMG_SIZE[0]):	
 	surface = cairo.ImageSurface(cairo.FORMAT_ARGB32, img_w, img_h)
 	
 	with cairo.Context(surface) as context:
 		context.set_source_rgb(1, 1, 1)  # White
 		context.paint()
 		
-		box = [0,0,img_w-1, img_h-1]
-		origin_x = 0
-		origin_y = 0
+		box = [0,0,img_w-5, img_h-5]
+		origin_x = 2
+		origin_y = 2
 		
 		if text != " ":
-			context.select_font_face('Helvetica', cairo.FONT_SLANT_NORMAL, cairo.FONT_WEIGHT_BOLD)
+			fontNames = ["Helvetica", "Arial", "Avenir", "sans-serif", ]
+			context.select_font_face(fontNames[fontIdx % len(fontNames)], cairo.FONT_SLANT_NORMAL, cairo.FONT_WEIGHT_BOLD)
 		
-			context.set_font_size(img_w)
+			context.set_font_size(img_w - 6)
 			box = context.text_extents(text)
 		
 			# center the image, slight random rotations and size
@@ -68,10 +69,10 @@ def GenerateImage(text, img_w=model.IMG_SIZE[1], img_h=model.IMG_SIZE[0]):
 	a.shape = (img_h, img_w, 4)
 	
 	# close crop the letter, expand to the size of the image
-	imageCoordA = [box[0] + origin_x + 0, box[1] + origin_y + 0]
-	imageCoordB = [box[0] + origin_x + box[2], box[1] + origin_y + 0]
-	imageCoordC = [box[0] + origin_x + box[2], box[1] + origin_y + box[3]]
-	imageCoordD = [box[0] + origin_x + 0, box[1] + origin_y + box[3]]
+	imageCoordA = [box[0] + origin_x + 0 - 2, box[1] + origin_y + 0 - 2]
+	imageCoordB = [box[0] + origin_x + box[2] + 2, box[1] + origin_y + 0 - 2]
+	imageCoordC = [box[0] + origin_x + box[2] + 2, box[1] + origin_y + box[3] + 2]
+	imageCoordD = [box[0] + origin_x + 0 - 2, box[1] + origin_y + box[3] + 2]
 	
 	a = four_point_transform(a, np.array([imageCoordA,imageCoordB,imageCoordC,imageCoordD], dtype='float32'), (img_w,img_h))
 	
@@ -102,7 +103,7 @@ def SaveImageToTraining(img, label):
 	
 for i in range(0,50):
 	for x in train.ALPHABET:
-		SaveImageToTraining(GenerateImage(x), x)
+		SaveImageToTraining(GenerateImage(x, i), x)
 
 
 

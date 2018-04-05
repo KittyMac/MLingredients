@@ -5,6 +5,8 @@ import Vision
 
 class TrainController: PlanetViewController, CameraCaptureHelperDelegate {
     
+    let ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ 1234567890,"
+    
     var captureHelper = CameraCaptureHelper(cameraPosition: .back)
     var model:VNCoreMLModel? = nil
     var overrideImage:CIImage? = nil
@@ -15,6 +17,8 @@ class TrainController: PlanetViewController, CameraCaptureHelperDelegate {
     
     var lastImageUsedForObservations:CIImage? = nil
     var observationsToProcess:[Any?] = []
+    
+    let trainingImagesPublisher:SwiftyZeroMQ.Socket? = Comm.shared.publisher(Comm.endpoints.pub_TrainingImages)
     
     
     func showCurrentObservation() {
@@ -34,10 +38,11 @@ class TrainController: PlanetViewController, CameraCaptureHelperDelegate {
         
         DispatchQueue.main.async {
             let extractedImage = self.lastOriginalImage!.applyingFilter("CIPerspectiveCorrection", parameters: perspectiveImagesCoords as! [String : Any])
-            self.preview.imageView.image = UIImage(ciImage: extractedImage)
+            let scaledImage = extractedImage.transformed(by: CGAffineTransform.init(scaleX: 28.0 / extractedImage.extent.size.width, y: 28.0 / extractedImage.extent.size.height))
+            self.preview.imageView.image = UIImage(ciImage: scaledImage)
             
             
-            let handler = VNImageRequestHandler(ciImage: extractedImage)
+            let handler = VNImageRequestHandler(ciImage: scaledImage)
             do {
                 let request = VNCoreMLRequest(model: self.ocrModel!)
                 try handler.perform([request])
@@ -55,7 +60,9 @@ class TrainController: PlanetViewController, CameraCaptureHelperDelegate {
     }
     
     func goToNextObservation() {
-        observationsToProcess.remove(at: 0)
+        if observationsToProcess.count > 0 {
+            observationsToProcess.remove(at: 0)
+        }
         showCurrentObservation()
     }
     
@@ -140,7 +147,7 @@ class TrainController: PlanetViewController, CameraCaptureHelperDelegate {
             
             
             // The OCR model converts image of character into a character
-            let modelURL = URL(fileURLWithPath: String(bundlePath:"bundle://Assets/predict/helveticaOCR.mlmodel"))
+            let modelURL = URL(fileURLWithPath: String(bundlePath:"bundle://Assets/predict/ocr.mlmodel"))
             let compiledUrl = try MLModel.compileModel(at: modelURL)
             let model = try MLModel(contentsOf: compiledUrl)
             self.ocrModel = try? VNCoreMLModel(for: model)
@@ -184,12 +191,64 @@ class TrainController: PlanetViewController, CameraCaptureHelperDelegate {
         preview.view.addGestureRecognizer(tap)
         preview.view.isUserInteractionEnabled = true
         
-        
-        
-        
         nextObservation.button.add(for: .touchUpInside) {
             self.goToNextObservation()
         }
+        
+        // Generate all of the class buttons we need and space them nicely in the buttonsContainer
+        for i in 0..<ALPHABET.count {
+            _ = CreateButton(UInt8(i), ALPHABET[i...i])
+        }
+        
+    }
+    
+    func CreateButton(_ classValue:UInt8, _ label:String) -> Button {
+        
+        var leftMargin = 5
+        let topMargin = 5
+        
+        let sizeOfButton = 58
+        let buttonPadding = 4
+        let buttonsPerRow = (Int(view.frame.width) - leftMargin * 2) / sizeOfButton
+        let btnIdx = buttonsContainer.view.subviews.count
+        let xIdx = btnIdx % buttonsPerRow
+        let yIdx = btnIdx / buttonsPerRow
+        
+        leftMargin += (Int(view.frame.width) - buttonsPerRow * sizeOfButton) / 2
+        
+        let btn = Button().new("ButtonStd") { this in
+            this.title = label
+            
+            this.frame = CGRect(x: buttonPadding + leftMargin + xIdx * sizeOfButton, y: buttonPadding + topMargin + yIdx * sizeOfButton, width: sizeOfButton - buttonPadding * 2, height: sizeOfButton - buttonPadding * 2)
+        }
+        
+        btn.button.add(for: .touchUpInside) {
+            // submit the image and correct labelling to the server
+            var filename = String.init(format: "%@", UUID().uuidString)
+            
+            for i in 0..<self.ALPHABET.count {
+                filename += String.init(format: "_%d", (btnIdx == i ? 1 : 0))
+            }
+            
+            filename += ".png"
+            
+            let extractedImage = self.lastOriginalImage!.applyingFilter("CIPerspectiveCorrection", parameters: self.observationsToProcess[0] as! [String : Any])
+            let scaledImage = extractedImage.transformed(by: CGAffineTransform.init(scaleX: 28.0 / extractedImage.extent.size.width, y: 28.0 / extractedImage.extent.size.height))
+            guard let pngData = self.ciContext.pngRepresentation(of:scaledImage, format: kCIFormatARGB8, colorSpace: CGColorSpaceCreateDeviceRGB(), options: [:]) else {
+                return
+            }
+            
+            var dataPacket = Data()
+            dataPacket.append(contentsOf: filename.asciiArray8 as [UInt8])
+            dataPacket.append(0)
+            dataPacket.append(pngData)
+            try! self.trainingImagesPublisher?.send(data: dataPacket)
+            
+        }
+
+        buttonsContainer.view.addSubview(btn.button)
+        
+        return btn
     }
     
     @objc func nextOverrideImage() {
@@ -234,6 +293,9 @@ class TrainController: PlanetViewController, CameraCaptureHelperDelegate {
     }
     fileprivate var predictionLabel: Label {
         return mainXmlView!.elementForId("predictionLabel")!.asLabel!
+    }
+    fileprivate var buttonsContainer: View {
+        return mainXmlView!.elementForId("buttonsContainer")!.asView!
     }
 }
 

@@ -14,23 +14,33 @@ import struct
 import model
 import images
 
-ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ 1234567890"
+ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ 1234567890,"
 ALPHABET_LEN = len(ALPHABET)
 
 ACCURACY_THRESHOLD = 0.01
 MAX_SAMPLES_TO_TRAIN = 0
 TRAIN_PATH = "./train/"
+PERMANENT_PATH = "./permanent/"
 
 def Learn():
 	
-	model_h5_name = "helveticaOCR.h5"
-	model_coreml_name = "helveticaOCR.mlmodel"
+	model_h5_name = "ocr.h5"
+	model_coreml_name = "ocr.mlmodel"
 			
 	# 2. Load the samples
 	print("Loading samples...")
 	total_labels = []
 	total_imgs = images.generate_image_array(TRAIN_PATH, MAX_SAMPLES_TO_TRAIN)
-	images.load_images(total_imgs, total_labels, TRAIN_PATH, MAX_SAMPLES_TO_TRAIN)	
+	images.load_images(total_imgs, total_labels, TRAIN_PATH, MAX_SAMPLES_TO_TRAIN)
+	
+	permanent_labels = []
+	permanent_imgs = images.generate_image_array(PERMANENT_PATH, MAX_SAMPLES_TO_TRAIN)
+	images.load_images(permanent_imgs, permanent_labels, PERMANENT_PATH, MAX_SAMPLES_TO_TRAIN)
+
+	
+	total_imgs = np.concatenate((total_imgs,permanent_imgs), axis=0) if len(permanent_imgs) > 0 else total_imgs
+	total_labels = np.concatenate((total_labels,permanent_labels), axis=0) if len(permanent_labels) > 0 else total_labels
+
 		
 	#print(total_labels)
 	#print(total_imgs)
@@ -66,7 +76,7 @@ def Learn():
 	# 3. Train the CNN on the samples
 	cnn_model = model.cnn_model()
 	
-	for iteration in range(0,4):
+	for iteration in range(0,3):
 		print("*** iteration ", iteration)
 		cnn_model.fit(total_imgs, total_labels,
 			batch_size=32,

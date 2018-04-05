@@ -11,7 +11,17 @@
 		465A199A2073F80A00FC8785 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 465A19982073F80A00FC8785 /* Main.storyboard */; };
 		465A199C2073F80A00FC8785 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 465A199B2073F80A00FC8785 /* Assets.xcassets */; };
 		465A199F2073F80A00FC8785 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 465A199D2073F80A00FC8785 /* LaunchScreen.storyboard */; };
-		46DE635B2073FAAF00C998E3 /* PlanetSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46DE635C2073FAAF00C998E3 /* PlanetSwift.framework */; };
+		466900CD2076798500A95F99 /* Comm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466900BC2076798500A95F99 /* Comm.swift */; };
+		466900CE2076798500A95F99 /* libzmq-ios.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 466900BE2076798500A95F99 /* libzmq-ios.a */; };
+		466900D22076798500A95F99 /* Context.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466900C42076798500A95F99 /* Context.swift */; };
+		466900D32076798500A95F99 /* Poller.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466900C52076798500A95F99 /* Poller.swift */; };
+		466900D42076798500A95F99 /* Socket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466900C62076798500A95F99 /* Socket.swift */; };
+		466900D52076798500A95F99 /* SocketSendRecvOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466900C72076798500A95F99 /* SocketSendRecvOption.swift */; };
+		466900D62076798500A95F99 /* SocketType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466900C82076798500A95F99 /* SocketType.swift */; };
+		466900D72076798500A95F99 /* SwiftyZeroMQ.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466900CA2076798500A95F99 /* SwiftyZeroMQ.swift */; };
+		466900D82076798500A95F99 /* ZeroMQError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466900CB2076798500A95F99 /* ZeroMQError.swift */; };
+		466900DA207679A000A95F99 /* libc++.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 466900D9207679A000A95F99 /* libc++.tbd */; };
+		466900DC2076843700A95F99 /* Object+Rocco.swift in Sources */ = {isa = PBXBuildFile; fileRef = 466900DB2076843700A95F99 /* Object+Rocco.swift */; };
 		46DE635D2073FAC100C998E3 /* PlanetSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 46DE635C2073FAAF00C998E3 /* PlanetSwift.framework */; };
 		46DE635E2073FAC100C998E3 /* PlanetSwift.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 46DE635C2073FAAF00C998E3 /* PlanetSwift.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		46DE6364207404FC00C998E3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 46DE6361207404FC00C998E3 /* AppDelegate.swift */; };
@@ -45,6 +55,23 @@
 		465A199B2073F80A00FC8785 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		465A199E2073F80A00FC8785 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		465A19A02073F80A00FC8785 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		466900BC2076798500A95F99 /* Comm.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Comm.swift; sourceTree = "<group>"; };
+		466900BE2076798500A95F99 /* libzmq-ios.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libzmq-ios.a"; sourceTree = "<group>"; };
+		466900BF2076798500A95F99 /* libzmq-macos.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libzmq-macos.a"; sourceTree = "<group>"; };
+		466900C02076798500A95F99 /* libzmq-tvos.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libzmq-tvos.a"; sourceTree = "<group>"; };
+		466900C12076798500A95F99 /* libzmq-watchos.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libzmq-watchos.a"; sourceTree = "<group>"; };
+		466900C22076798500A95F99 /* MLIngredients-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MLIngredients-Bridging-Header.h"; sourceTree = "<group>"; };
+		466900C42076798500A95F99 /* Context.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Context.swift; sourceTree = "<group>"; };
+		466900C52076798500A95F99 /* Poller.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Poller.swift; sourceTree = "<group>"; };
+		466900C62076798500A95F99 /* Socket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Socket.swift; sourceTree = "<group>"; };
+		466900C72076798500A95F99 /* SocketSendRecvOption.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketSendRecvOption.swift; sourceTree = "<group>"; };
+		466900C82076798500A95F99 /* SocketType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketType.swift; sourceTree = "<group>"; };
+		466900C92076798500A95F99 /* SwiftyZeroMQ.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwiftyZeroMQ.h; sourceTree = "<group>"; };
+		466900CA2076798500A95F99 /* SwiftyZeroMQ.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyZeroMQ.swift; sourceTree = "<group>"; };
+		466900CB2076798500A95F99 /* ZeroMQError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZeroMQError.swift; sourceTree = "<group>"; };
+		466900CC2076798500A95F99 /* zmq.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = zmq.h; sourceTree = "<group>"; };
+		466900D9207679A000A95F99 /* libc++.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libc++.tbd"; path = "usr/lib/libc++.tbd"; sourceTree = SDKROOT; };
+		466900DB2076843700A95F99 /* Object+Rocco.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Object+Rocco.swift"; sourceTree = "<group>"; };
 		46DE635C2073FAAF00C998E3 /* PlanetSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = PlanetSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		46DE6361207404FC00C998E3 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		46DE6363207404FC00C998E3 /* MainController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainController.swift; sourceTree = "<group>"; };
@@ -61,8 +88,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				466900DA207679A000A95F99 /* libc++.tbd in Frameworks */,
+				466900CE2076798500A95F99 /* libzmq-ios.a in Frameworks */,
 				46DE635D2073FAC100C998E3 /* PlanetSwift.framework in Frameworks */,
-				46DE635B2073FAAF00C998E3 /* PlanetSwift.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -107,9 +135,48 @@
 			path = MLingredients;
 			sourceTree = "<group>";
 		};
+		466900BB2076798500A95F99 /* zmq */ = {
+			isa = PBXGroup;
+			children = (
+				466900BC2076798500A95F99 /* Comm.swift */,
+				466900BD2076798500A95F99 /* Libraries */,
+				466900C22076798500A95F99 /* MLIngredients-Bridging-Header.h */,
+				466900C32076798500A95F99 /* Sources */,
+			);
+			path = zmq;
+			sourceTree = "<group>";
+		};
+		466900BD2076798500A95F99 /* Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				466900BE2076798500A95F99 /* libzmq-ios.a */,
+				466900BF2076798500A95F99 /* libzmq-macos.a */,
+				466900C02076798500A95F99 /* libzmq-tvos.a */,
+				466900C12076798500A95F99 /* libzmq-watchos.a */,
+			);
+			path = Libraries;
+			sourceTree = "<group>";
+		};
+		466900C32076798500A95F99 /* Sources */ = {
+			isa = PBXGroup;
+			children = (
+				466900C42076798500A95F99 /* Context.swift */,
+				466900C52076798500A95F99 /* Poller.swift */,
+				466900C62076798500A95F99 /* Socket.swift */,
+				466900C72076798500A95F99 /* SocketSendRecvOption.swift */,
+				466900C82076798500A95F99 /* SocketType.swift */,
+				466900C92076798500A95F99 /* SwiftyZeroMQ.h */,
+				466900CA2076798500A95F99 /* SwiftyZeroMQ.swift */,
+				466900CB2076798500A95F99 /* ZeroMQError.swift */,
+				466900CC2076798500A95F99 /* zmq.h */,
+			);
+			path = Sources;
+			sourceTree = "<group>";
+		};
 		46DE635A2073FAAF00C998E3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				466900D9207679A000A95F99 /* libc++.tbd */,
 				46DE635C2073FAAF00C998E3 /* PlanetSwift.framework */,
 			);
 			name = Frameworks;
@@ -118,8 +185,10 @@
 		46DE6360207404FC00C998E3 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				466900BB2076798500A95F99 /* zmq */,
 				46DE6361207404FC00C998E3 /* AppDelegate.swift */,
 				46DE636A2074058000C998E3 /* CameraCaptureHelper.swift */,
+				466900DB2076843700A95F99 /* Object+Rocco.swift */,
 				46DE636D2074058000C998E3 /* String+ASCII.swift */,
 				46DE636B2074058000C998E3 /* UIControl+Closures.swift */,
 				46DE636C2074058000C998E3 /* UIView+FillSuperview.swift */,
@@ -220,14 +289,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				466900CD2076798500A95F99 /* Comm.swift in Sources */,
 				46DE636E2074058000C998E3 /* CameraCaptureHelper.swift in Sources */,
 				46DE636F2074058000C998E3 /* UIControl+Closures.swift in Sources */,
+				466900D22076798500A95F99 /* Context.swift in Sources */,
+				466900D82076798500A95F99 /* ZeroMQError.swift in Sources */,
+				466900D62076798500A95F99 /* SocketType.swift in Sources */,
 				4640B7A22075673C002A6EA1 /* TrainController.swift in Sources */,
 				46DE63702074058000C998E3 /* UIView+FillSuperview.swift in Sources */,
+				466900D52076798500A95F99 /* SocketSendRecvOption.swift in Sources */,
 				46DE6365207404FC00C998E3 /* MainController.swift in Sources */,
+				466900D72076798500A95F99 /* SwiftyZeroMQ.swift in Sources */,
 				46DE63712074058000C998E3 /* String+ASCII.swift in Sources */,
+				466900DC2076843700A95F99 /* Object+Rocco.swift in Sources */,
+				466900D42076798500A95F99 /* Socket.swift in Sources */,
 				46DE6364207404FC00C998E3 /* AppDelegate.swift in Sources */,
 				46DE63742074058800C998E3 /* PredictController.swift in Sources */,
+				466900D32076798500A95F99 /* Poller.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -368,8 +446,13 @@
 				DEVELOPMENT_TEAM = A3LA43YQN5;
 				INFOPLIST_FILE = MLingredients/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/MLingredients/Source/zmq/Libraries",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.chimerasw.MLingredients;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "MLIngredients/Source/zmq/MLIngredients-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -383,8 +466,13 @@
 				DEVELOPMENT_TEAM = A3LA43YQN5;
 				INFOPLIST_FILE = MLingredients/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/MLingredients/Source/zmq/Libraries",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.chimerasw.MLingredients;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "MLIngredients/Source/zmq/MLIngredients-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
