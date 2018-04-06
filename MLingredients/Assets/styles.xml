@@ -7,9 +7,10 @@
     <Label styleId="LabelStd" fontName="GillSans" fontSize="18" textColor="@config(Color.text)" />
     <Label styleId="LabelBld" fontName="GillSans-SemiBold" fontSize="18" textColor="@config(Color.text)" />
     
-    <Label styleId="PredictionLabel" fontName="GillSans-SemiBold" textAlignment="center" fontSize="24" backgroundColor="#000000AA" textColor="#FFFFFFFF" />
+    <Label styleId="PredictionLabel" fontName="GillSans-SemiBold" textAlignment="center" fontSize="18" backgroundColor="#000000AA" textColor="#FFFFFFFF" />
     
-    <Label styleId="ResultsLabel" fontName="GillSans-SemiBold" textAlignment="center" fontSize="24" backgroundColor="#000000FF" textColor="#FFFFFFFF" />
+    <Label styleId="ResultsLabel" fontName="GillSans-SemiBold" textAlignment="center" fontSize="18" backgroundColor="#000000FF" textColor="#FFFFFFFF" />
+    <Label styleId="LabelLabel" fontName="GillSans-SemiBold" textAlignment="center" fontSize="10" backgroundColor="#333333FF" textColor="#CCCCCCFF" />
     
     
     <TextView styleID="StoryText" />

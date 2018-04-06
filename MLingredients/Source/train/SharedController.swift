@@ -27,14 +27,16 @@ class SharedController: PlanetViewController, CameraCaptureHelperDelegate {
 
     
     func playCameraImage(_ cameraCaptureHelper: CameraCaptureHelper, image: CIImage, originalImage: CIImage, frameNumber:Int, fps:Int) {
-        if frameNumber > 10 && frameNumber % 200 == 0 {
-            if overrideImage != nil {
-                lastOriginalImage = overrideImage!
-            } else {
-                lastOriginalImage = originalImage
-            }
+        if frameNumber > 10 {
+            
             
             if observationsToProcess.count == 0 {
+                
+                if overrideImage != nil {
+                    lastOriginalImage = overrideImage!
+                } else {
+                    lastOriginalImage = originalImage
+                }
 
                 //let convertedImage = image |> adjustColors |> convertToGrayscale
                 let handler = VNImageRequestHandler(ciImage: self.lastOriginalImage!)
@@ -69,6 +71,11 @@ class SharedController: PlanetViewController, CameraCaptureHelperDelegate {
                                     }
                                 }
                             }
+                            if numAspect == 0 {
+                                self.clearObservations()
+                                return
+                            }
+                            
                             avgAspect /= numAspect
                             
                             
@@ -87,7 +94,9 @@ class SharedController: PlanetViewController, CameraCaptureHelperDelegate {
                                     let charH = rectangleObservation.topRight.y - rectangleObservation.bottomRight.y
                                     let charAspect = charW/charH
                                     
-                                    let subdivisions = Int(round(charAspect / avgAspect))
+                                    var subdivisions = Int(round(charAspect / avgAspect))
+                                    
+                                    subdivisions = 1
                                     
                                     //print("\(subdivisions) \(charAspect)        \(avgAspect)")
                                     
@@ -134,7 +143,7 @@ class SharedController: PlanetViewController, CameraCaptureHelperDelegate {
     var currentOverrideImageIndex = 0
     
     override func viewDidLoad() {
-        overrideImage = CIImage(contentsOf: URL(fileURLWithPath: String(bundlePath: "bundle://Assets/predict/debug/IMG_0001.JPG")))
+        overrideImage = CIImage(contentsOf: URL(fileURLWithPath: String(bundlePath: "bundle://Assets/predict/debug/IMG_0000.JPG")))
         
         if(overrideImage != nil) {
             navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Next", style: .plain, target: self, action: #selector(nextOverrideImage))

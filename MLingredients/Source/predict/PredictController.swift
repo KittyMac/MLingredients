@@ -67,6 +67,27 @@ class PredictController: SharedController {
     var ocrModel:VNCoreMLModel? = nil
     var ingredientWordToIndex = [String:Int]()
     
+    func bestGuessTranslation(_ word:String) -> String? {
+        
+        // do an ngram comparison against all words in the word list, find the closest word
+        // and if it is below a certain threshold return it.  otherwise return nil
+        var minD = 999999
+        var closeWord:String? = nil
+        for otherWord in ingredientWordToIndex.keys {
+            let d = Tools.levenshtein(aStr: word, bStr: otherWord)
+            if d < minD {
+                minD = d
+                closeWord = otherWord
+            }
+        }
+        
+        if minD < 3 {
+            return closeWord
+        }
+        
+        return nil
+    }
+    
     func loadModels() {
         do {
             // The OCR model converts image of character into a character
@@ -132,31 +153,76 @@ class PredictController: SharedController {
             }
         }
     
-        finalString = finalString.replacingOccurrences(of: " ", with: "").lowercased()
+        finalString = finalString.replacingOccurrences(of: "  ", with: " ").lowercased()
+        finalString = finalString.replacingOccurrences(of: "  ", with: " ").lowercased()
+        finalString = finalString.replacingOccurrences(of: "  ", with: " ").lowercased()
         finalString = finalString.replacingOccurrences(of: ",", with: " ").lowercased()
         print(finalString)
+        
         ocrResults.label.text = finalString
         
-        
         // Clear up the OCR results
-        // 1. Check each ingredients against our ingredients dictionary, if its close enough assume that is the word
+        // Run each ingredients against our ingredients dictionary, if the word is slightly mispelled (for example "mlk" instead of "milk") then go ahead
+        // and assume that is the word we want to use
         
+        let wordList = finalString.split(separator: " ")
+        var convertedWordList:[String] = []
         
-        
-        // Predict against the ingredients model to discover the health score
-        if let healthModel = self.healthModel {
-            do {
-                let source = HealthModelSource(finalString, ingredientWordToIndex)
-                let prediction = try healthModel.prediction(from: source)
-                if let result = prediction.featureValue(for: "health") {
-                    predictionResults.label.text = String(format:"Health Factor: %d", Int(result.multiArrayValue![0].doubleValue * 100.0))
+        var i = 0
+        while i < wordList.count {
+            
+            // sometimes words get broken up into multiple words, this allows us to try and string those together
+            if let bestGuess = bestGuessTranslation(String(wordList[i])) {
+                convertedWordList.append(bestGuess)
+                i += 1
+                continue
+            } else if i+1 < wordList.count {
+                if let bestGuess = bestGuessTranslation(String(wordList[i]) + String(wordList[i+1])) {
+                    convertedWordList.append(bestGuess)
+                    i += 2
+                    continue
+                } else if i+2 < wordList.count {
+                    if let bestGuess = bestGuessTranslation(String(wordList[i]) + String(wordList[i+1]) + String(wordList[i+2])) {
+                        convertedWordList.append(bestGuess)
+                        i += 3
+                        continue
+                    }
                 }
-                
-            } catch {
-                print(error)
+            }
+            
+             i += 1
+        }
+        
+        finalString = convertedWordList.joined(separator:" ")
+        
+        if finalString.count == 0 {
+            
+            cleanedOCRResults.label.text = "No Ingredients Recognized"
+        
+        } else {
+            cleanedOCRResults.label.text = finalString
+            
+            // Check to see if we have recognized ANY of the ingredients in the listing; if we have not, no point in
+            // trying to predict how healthy the item is
+            
+            // Predict against the ingredients model to discover the health score
+            if let healthModel = self.healthModel {
+                do {
+                    let source = HealthModelSource(finalString, ingredientWordToIndex)
+                    let prediction = try healthModel.prediction(from: source)
+                    if let result = prediction.featureValue(for: "health") {
+                        predictionResults.label.text = String(format:"Health Factor: %d", Int(result.multiArrayValue![0].doubleValue * 100.0))
+                    }
+                    
+                } catch {
+                    print(error)
+                }
             }
         }
         
+        if overrideImage == nil {
+            clearObservations()
+        }
     }
     
     override func viewDidLoad() {
@@ -208,6 +274,9 @@ class PredictController: SharedController {
     }
     fileprivate var ocrResults: Label {
         return mainXmlView!.elementForId("ocrResults")!.asLabel!
+    }
+    fileprivate var cleanedOCRResults: Label {
+        return mainXmlView!.elementForId("cleanedOCRResults")!.asLabel!
     }
     fileprivate var predictionResults: Label {
         return mainXmlView!.elementForId("predictionResults")!.asLabel!

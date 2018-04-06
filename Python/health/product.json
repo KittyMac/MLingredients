@@ -1265,7 +1265,7 @@
         "name": "Duncan Hines Chocolate Buttercream Creamy Home-style Frosting 16 Oz Canister"
     },
     {
-        "health": 0,
+        "health": 1,
         "ingredients": "wheatflour cornsyrup dextrose sugar partiallyhydrogenatedsoybeanoil highfructosecornsyrup modifiedwhey skimmilk cream mono diglycerides salt soylecithin cornstarch artificialflavor containswheat milk soyingredients",
         "name": "Caramel Creams Original Candy, 4 Oz"
     },
@@ -1845,12 +1845,12 @@
         "name": "Delallo Super Select Hot Pepper Rings, 16 Oz"
     },
     {
-        "health": 0,
+        "health": 1,
         "ingredients": "sugar unsweetenedchocolate cornsyrup cocoabutter sweetenedcondensedmilk pasteurizedmilk sugar wholemilkpowder palmoil water butter cream salt milkfat salt natural artificialflavor disodiumphosphate sorbitol soylecithin--anemulsifier potassiumsorbate citricacid tbhq--preservatives vanilla maycontaintreenuts",
         "name": "Ghirardelli Chocolate Squares Valentine's Caramel Chocolate Trio, 8.51 Oz"
     },
     {
-        "health": 0,
+        "health": 1,
         "ingredients": "m m'smilkchocolate milkchocolate sugar chocolate skimmilk cocoabutter lactose milkfat soylecithin pgpr salt artificial naturalflavors sugar cornstarch lessthan1%ofcornsyrup dextrin coloring includingblue1lake yellow6 red40 yellow5 blue1 yellow6lake red40lake yellow5lake blue2 blue2lake gumacacia m m'speanut milkchocolate sugar chocolate cocoabutter skimmilk lactose milkfat soylecithin salt artificialflavors sugar peanuts cornstarch lessthan1%ofcornsyrup dextrin coloring includingblue1lake yellow6 red40 yellow5 blue1 yellow6lake red40lake yellow5lake blue2lake blue2 gumacacia m m'smilkchocolate containsmilk soy maycontainpeanuts m m'speanut containspeanuts milk soy maycontaintreenuts",
         "name": "M&m's Milk Chocolate & Peanut Candy, 42 Oz, (pack of 2)"
     },
@@ -2520,7 +2520,7 @@
         "name": "Utz Restaurant Style Tortilla Chips, 4 Oz"
     },
     {
-        "health": 0,
+        "health": 1,
         "ingredients": "milkchocolate sugar chocolate cocoabutter skimmilk lactose milkfat soylecithin sugar cornsyrup hydrogenatedpalmkerneloil orpalmoil lessthan2%-cocoapowderprocessed alkali salt eggwhites artificial naturalflavors maycontainpeanuts",
         "name": "3 Musketeers Chocolate Fun Size Chocolate Bars Candy Pack, 2.93 Oz 6 Pack"
     },
@@ -2930,7 +2930,7 @@
         "name": "Hawaiian Punch Singles to Go Sugar Free Lemon Berry Squeezeets .95 oz"
     },
     {
-        "health": 0,
+        "health": 3,
         "ingredients": "ingredientsconsistofchocolatecandy{maltitol chocolate cocoabutter sodiumcaseinate milk milkfat soylecithin anemulsifier sucralose natural artificialflavor salt} peanuts maltitol foodstarch-modified citricacid sorbicacid maltitolsyrup confectionersglaze gumarabic coconutoil",
         "name": "Sugar Free Chocolate Covered Peanuts, 3.6 oz. Bag"
     },
@@ -3240,7 +3240,7 @@
         "name": "Wise Hot Cheese Popcorn, 2.5 Oz"
     },
     {
-        "health": 0,
+        "health": 1,
         "ingredients": "sourpatchkidssugar invertsugar cornsyrup modifiedcornstarch tartaricacid citricacid natural artificialflavoring yellow6 red40 yellow5 blue1 sourpatchwatermelon sugar invertsugar cornsyrup modifiedcornstarch tartaricacid citricacid natural artificialflavoring titaniumdioxide red40 yellow5 blue1",
         "name": "Sour Patch Kids & Sour Patch Watermelon Candy Variety Pack, 40 Count, 24 Oz"
     },
@@ -3620,7 +3620,7 @@
         "name": "Schweppes Orange Sparkling Seltzer Water, 7.5 Fl Oz, 8 Pack"
     },
     {
-        "health": 0,
+        "health": 1,
         "ingredients": "organicevaporatedcanejuice organicbrownricesyrup naturalpeppermintflavor coloradded organicfruitjuice",
         "name": "Tru Joy Sweets - Organic Candy Canes Peppermint - 10 Piece(s)"
     },
@@ -3695,7 +3695,7 @@
         "name": "Tastykake Creme Filled Krimpets 2.375 Oz, 6 Count"
     },
     {
-        "health": 0,
+        "health": 1,
         "ingredients": "milkchocolate sugar cocoabutter chocolate nonfatmilk lactose milkfat soylecithin vanillin-anartificialflavor cornsyrup sugar highfructosecornsyrup nonfatmilk crispedrice riceflour sugar barleymalt salt coconutoil butter mono- diglycerides salt soylecithin artificial naturalflavor contains milk soyingredient maycontainpeanut egg",
         "name": "100 Grand Candy Bars, 0.75 Oz, 6 Count"
     },
@@ -3800,12 +3800,12 @@
         "name": "Ferrero Rocher Heart Gift Box, 16 Peices"
     },
     {
-        "health": 0,
+        "health": 1,
         "ingredients": "cornsyrup sugar lemonjuicefromconcentrate naturallemonoil citricacid yellow5 blue1",
         "name": "Farley's & Sathers Candy"
     },
     {
-        "health": 0,
+        "health": 1,
         "ingredients": "semisweetchocolate sugar chocolate chocolateprocessed alkali cocoabutter milkfat soylecithin natural artificialflavors",
         "name": "Dove Dark Chocolate Sharing Size Candy Bars Box, 3.30 Oz 12 Pack"
     },
@@ -4070,7 +4070,7 @@
         "name": "Vinaigrette and Marinade"
     },
     {
-        "health": 0,
+        "health": 1,
         "ingredients": "sugar cornsyrup cornstarch glycerin gelatin artificialflavor red3 yellow5 yellow6 blue1 red40 thisproductwasmanufacturedinafacilitywheremilk treenuts peanuts wheat soyareusedintheproductionofotherproducts",
         "name": "Brach s Tiny Conversation Hearts Valentine s Day Candy, 18 Ounce Bag"
     },
@@ -4230,7 +4230,7 @@
         "name": "Woodstock Farms - Organic Tomato Paste - 6 Oz."
     },
     {
-        "health": 0,
+        "health": 2,
         "ingredients": "sugar cornsyrup highfructosecornsyrup citricacid natural artificialflavors colors red40 yellow5 blue1 thesearedelicious onceyou'vetriedoneit'scertainyou'lltryanother adeliciouslymoreishtasteofbutter ruminapololikesweet",
         "name": "Lifesavers Candy Five Flavor - 14 Pieces / Pack, 20 Packs"
     },
@@ -4545,7 +4545,7 @@
         "name": "Festive Cookies"
     },
     {
-        "health": 0,
+        "health": 1,
         "ingredients": "frosting sugar water palmoil cornsyrup cocoaprocessed alkali cornstarch canolaoil contains2 lessof salt mono diglycerides sodiumacidpyrophosphate natural artificialflavor polysorbate60 modifiedcornstarch potassiumsorbate preservative soylecithin citricacid antioxidants ascorbylpalmitate mixedtocopherols chamomile rosemaryextracts xanthangum artificialcolor candybits sugar riceflour vegetableoil palmkernel orpalm cornstarch confectioner'sglaze gumarabic cellulosegum carrageenan soylecithin yellow5 yellow6 blue1 carnaubawax red40 blue2lake artificialflavor",
         "name": "Pillsbury Funfetti Chocolate Fudge Frosting, 15.6 Oz"
     },
@@ -4720,7 +4720,7 @@
         "name": "Stonewall Kitchen Spicy Corn Relish - 16 Oz"
     },
     {
-        "health": 0,
+        "health": 1,
         "ingredients": "milkchocolate sugar chocolate cocoabutter skimmilk lactose milkfat peanuts soylecithin salt artificialflavors peanuts sugar cornstarch lessthan1%-cornsyrup dextrin coloring includesblue1lake yellow6 red40 yellow5 blue1 yellow6lake red40lake yellow5lake blue2lake blue2 containspeanuts milk soy maycontaintreenuts",
         "name": "M&m's Peanut Chocolate Mega Size Candy Bag, 10.19 Oz"
     },
@@ -4860,7 +4860,7 @@
         "name": "Barilla Pastina Pasta"
     },
     {
-        "health": 0,
+        "health": 1,
         "ingredients": "kitkatsnacksize sugar wheatflour nonfatmilk cocoabutter chocolate palmkerneloil lactose milk milkfat contains2% lessof soylecithin pgpr emulsifier yeast vanillin artificialflavor salt sodiumbicarbonate manufacturedinafacilitythatalsoprocessespeanuts milkchocolate milkchocolate sugar milk lactose soylecithin artificialflavor manufacturedonthesameequipmentthatprocessesalmonds mr goodbar sugar peanuts vegetableoil cocoabutter palm shea sunflower orsaffloweroil reducedproteinwhey milk contains2% lessof cocoaprocessed alkali artificialflavor reese'speanutbutter milkchocolate sugar emulsifier sugar dextrose tbhq preservative reese'spieces sugar partiallydefattedpeanuts partiallyhydrogenatedvegetableoil palmkernel soybeanoil cornsyrup contains2% lessof artificialcolor yellow5lake red40lake yellow6lake blue1lake resinousglaze modifiedcornstarch carnaubawax milk",
         "name": "Hershey's Big Box Favorites Snack Size Candy Pieces, 60 ct, 28.9 oz Bag"
     },
@@ -4910,7 +4910,7 @@
         "name": "Mike Ike Snack Pack 10.5 Ounce Bag"
     },
     {
-        "health": 0,
+        "health": 1,
         "ingredients": "milkchocolate sugar cocoabutter skimmilk chocolate lactose milkfat soylecithin artificialflavor cornsyrup sugar hydrogenatedpalmkerneloil orpalmoil skimmilk lessthan2-milkfat cocoapowderprocessed alkali maltedbarley lactose salt eggwhites artificialflavor",
         "name": "Candy Bars, Snack Size, 10 bars 5.77 oz (163.6 g)"
     },
@@ -5010,7 +5010,7 @@
         "name": "Folgers Ground Coffee Special Roast Medium, 24.2 OZ"
     },
     {
-        "health": 0,
+        "health": 1,
         "ingredients": "milkchocolate sugar chocolate skimmilk cocoabutter lactose milkfat soylecithin salt artificialflavors sugar lessthan2%-cornstarch cornsyrup coloring includesyellow5lake red40lake blue1lake yellow6lake blue2lake yellow5 red40 blue1 yellow6 blue2 dextrin",
         "name": "M&M'S Milk Chocolate MINIS Size Candy 1.08-Ounce Tube 24-Count"
     },
@@ -5325,7 +5325,7 @@
         "name": "Amy's Organic Light in Sodium Chili, Spicy, 14.7 Ounce (Pack of 12)"
     },
     {
-        "health": 0,
+        "health": 1,
         "ingredients": "milkchocolatecandies milkchocolate sugar chocolate skimmilk cocoabutter lactose milkfat soylecithin salt artificialflavors sugar cornstarch lessthan1%cornsyrup dextrin coloring includesblue1lake yellow6 red40 yellow5 blue1 red40lake blue2lake yellow6lake yellow5lake blue2 gumacacia peanutchocolatecandies milkchocolate sugar chocolate cocoabutter skimmilk lactose milkfat peanuts soylecithin salt artificialflavors sugar peanuts cornstarch lessthan1%cornsyrup dextrin coloring includesblue1lake yellow6 red40 yellow5 blue1 yellow6lake red40lake yellow5lake blue2lake blue2 gumacacia peanutbutterchocolatecandies milkchocolate sugar cocoabutter chocolate skimmilk milkfat lactose peanuts soylecithin salt artificialflavors peanutbutter partiallydefattedpeanuts sugar hydrogenatedpalmkerneloil partiallydefattedpeanutflour cornstarch dextrose lessthan1%cornsyrup naturalflavors salt dextrin coloring includesblue1lake red40 yellow6 yellow5 blue1 red40lake yellow6lake yellow5lake blue2 blue2lake propylgallatetomaintainfreshness gumacacia containsmilk soy maycontainpeanut",
         "name": "M&M'S Variety Mix Chocolate Fun Size Candy 85.23-Ounce 150-Piece Bag"
     },
@@ -5365,7 +5365,7 @@
         "name": "Flavorganics Vanilla Extract, 4 Ounce"
     },
     {
-        "health": 0,
+        "health": 2,
         "ingredients": "sugar roastedpeanuts cornsyrup partiallyhydrogenatedpalmkernel coconut soybeanoils milk cocoa highfructosesyrup dextrose skimmilk whey glycerin salt emulsifiers monoglycerides soylecithin peanutoil natural artificialflavors carrageenan tbhq citricacid topreservefreshness caramelcolor sugar roastedpeanuts cornsyrup hydrogenatedpalmkernel coconutoil cocoa highfructosecornsyrup nonfatmilk glycerin dairyproductsolids lessthan1%ofdextrose salt soylecithin soybeanoil carrageenan tbhq citricacid topreservefreshness lacticacidesters contains peanut milk soyingredients",
         "name": "Nestle Baby Ruth Milk Chocolate Candy Bars"
     },
@@ -8580,7 +8580,7 @@
         "name": "Morning Song Berry Punch Suet"
     },
     {
-        "health": 0,
+        "health": 1,
         "ingredients": "sugar semi-sweetchocolate sugar chocolate cocoabutter soyalecithin-anemulsifier vanillin-anartificialflavor cornsyrup confectionersglaze modifiedfoodstarch peppermintoil invertase soyaalbumin gelatin milk eggmaybepresent semi-sweetchocolate sugar chocolate cocoabutter soyalecithin-anemulsifier vanillin-anartificialflavor",
         "name": "Junior Mints Candy, 4 oz, ()"
     },

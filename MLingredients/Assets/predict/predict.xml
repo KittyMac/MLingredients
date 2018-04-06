@@ -7,20 +7,52 @@
     
     <ImageView id="preview" contentMode="scaleAspectFit" backgroundColor="#000000FF" shadowRadius="4" shadowOffset="0,3" shadowColor="#000000FF" shadowOpacity="0.5" />
     <Constraint firstItem="preview" firstAttribute="width" secondItem="root" secondAttribute="width" multiplier="1.0"/>
-    <Constraint firstItem="preview" firstAttribute="height" secondItem="root" secondAttribute="height" multiplier="0.33"/>
+    <Constraint firstItem="preview" firstAttribute="height" secondItem="root" secondAttribute="height" multiplier="0.25"/>
     <Constraint firstItem="preview" firstAttribute="top" secondItem="root" secondAttribute="top" constant="60" />
     
     <Label id="ocrResults" styleId="ResultsLabel" numberOfLines="99" />
     <Constraint firstItem="ocrResults" firstAttribute="width" secondItem="root" secondAttribute="width" multiplier="1.0"/>
-    <Constraint firstItem="ocrResults" firstAttribute="height" secondItem="root" secondAttribute="height" multiplier="0.33"/>
+    <Constraint firstItem="ocrResults" firstAttribute="height" secondItem="root" secondAttribute="height" multiplier="0.25"/>
     <Constraint firstItem="ocrResults" firstAttribute="top" secondItem="preview" secondAttribute="bottom" />
     <Constraint firstItem="ocrResults" firstAttribute="left" secondItem="preview" secondAttribute="left" />
+    
+    <Label id="cleanedOCRResults" styleId="ResultsLabel" numberOfLines="99" />
+    <Constraint firstItem="cleanedOCRResults" firstAttribute="width" secondItem="root" secondAttribute="width" multiplier="1.0"/>
+    <Constraint firstItem="cleanedOCRResults" firstAttribute="height" secondItem="root" secondAttribute="height" multiplier="0.25"/>
+    <Constraint firstItem="cleanedOCRResults" firstAttribute="top" secondItem="ocrResults" secondAttribute="bottom" />
+    <Constraint firstItem="cleanedOCRResults" firstAttribute="left" secondItem="ocrResults" secondAttribute="left" />
 
-    <Label id="predictionResults" styleId="ResultsLabel" numberOfLines="99" />
+    <Label id="predictionResults" styleId="ResultsLabel" numberOfLines="1" />
     <Constraint firstItem="predictionResults" firstAttribute="width" secondItem="root" secondAttribute="width" multiplier="1.0"/>
-    <Constraint firstItem="predictionResults" firstAttribute="height" secondItem="root" secondAttribute="height" multiplier="0.33"/>
-    <Constraint firstItem="predictionResults" firstAttribute="top" secondItem="ocrResults" secondAttribute="bottom" />
-    <Constraint firstItem="predictionResults" firstAttribute="left" secondItem="ocrResults" secondAttribute="left" />
+    <Constraint firstItem="predictionResults" firstAttribute="height" secondItem="root" secondAttribute="height" multiplier="0.25"/>
+    <Constraint firstItem="predictionResults" firstAttribute="top" secondItem="cleanedOCRResults" secondAttribute="bottom" />
+    <Constraint firstItem="predictionResults" firstAttribute="left" secondItem="cleanedOCRResults" secondAttribute="left" />
+
+
+    <Label id="previewLabel" text="Image" styleId="LabelLabel" numberOfLines="1" />
+    <Constraint firstItem="previewLabel" firstAttribute="width" constant="80"/>
+    <Constraint firstItem="previewLabel" firstAttribute="height" constant="20"/>
+    <Constraint firstItem="previewLabel" firstAttribute="top" secondItem="preview" secondAttribute="top" constant="10" />
+    <Constraint firstItem="previewLabel" firstAttribute="left" secondItem="preview" secondAttribute="left" />
+    
+    
+    <Label id="ocrResultsLabel" text="Raw OCR" styleId="LabelLabel" numberOfLines="1" />
+    <Constraint firstItem="ocrResultsLabel" firstAttribute="width" constant="80"/>
+    <Constraint firstItem="ocrResultsLabel" firstAttribute="height" constant="20"/>
+    <Constraint firstItem="ocrResultsLabel" firstAttribute="top" secondItem="ocrResults" secondAttribute="top" constant="-10" />
+    <Constraint firstItem="ocrResultsLabel" firstAttribute="left" secondItem="ocrResults" secondAttribute="left" />
+    
+    <Label id="cleanedOCRResultsLabel" text="Cleaned OCR" styleId="LabelLabel" numberOfLines="1" />
+    <Constraint firstItem="cleanedOCRResultsLabel" firstAttribute="width" constant="80"/>
+    <Constraint firstItem="cleanedOCRResultsLabel" firstAttribute="height" constant="20"/>
+    <Constraint firstItem="cleanedOCRResultsLabel" firstAttribute="top" secondItem="cleanedOCRResults" secondAttribute="top" constant="-10" />
+    <Constraint firstItem="cleanedOCRResultsLabel" firstAttribute="left" secondItem="cleanedOCRResults" secondAttribute="left" />
+    
+    <Label id="predictionResultsLabel" text="Prediction" styleId="LabelLabel" numberOfLines="1" />
+    <Constraint firstItem="predictionResultsLabel" firstAttribute="width" constant="80"/>
+    <Constraint firstItem="predictionResultsLabel" firstAttribute="height" constant="20"/>
+    <Constraint firstItem="predictionResultsLabel" firstAttribute="top" secondItem="predictionResults" secondAttribute="top" constant="-10" />
+    <Constraint firstItem="predictionResultsLabel" firstAttribute="left" secondItem="predictionResults" secondAttribute="left" />
 
 
 </Scene>
