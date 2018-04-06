@@ -9,6 +9,9 @@
     
     <Label styleId="PredictionLabel" fontName="GillSans-SemiBold" textAlignment="center" fontSize="24" backgroundColor="#000000AA" textColor="#FFFFFFFF" />
     
+    <Label styleId="ResultsLabel" fontName="GillSans-SemiBold" textAlignment="center" fontSize="24" backgroundColor="#000000FF" textColor="#FFFFFFFF" />
+    
+    
     <TextView styleID="StoryText" />
 
 </Object>

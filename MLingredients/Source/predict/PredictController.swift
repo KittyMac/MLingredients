@@ -3,18 +3,98 @@ import PlanetSwift
 import CoreML
 import Vision
 
+class HealthModelSource : MLFeatureProvider {
+    
+    let MAX_LEN = 80
+    var ingredientData:MLMultiArray? = nil
+    
+    func padArray(to numToPad: Int, sequence: [NSNumber]) -> [NSNumber] {
+        var newSeq = sequence
+        for _ in sequence.count ... numToPad {
+            newSeq.insert(NSNumber(value:0.0), at: 0)
+        }
+        return newSeq
+    }
+    
+    func tokenizer(_ words: [String], _ ingredientWordToIndex:[String:Int]) -> [NSNumber] {
+        var tokens : [NSNumber] = []
+        for (index, word) in words.enumerated() {
+            if let val = ingredientWordToIndex[word] {
+                tokens.insert(NSNumber(value: val), at: index)
+            } else {
+                tokens.insert(NSNumber(value: 0.0), at: index)
+            }
+        }
+        return padArray(to: MAX_LEN-1, sequence: tokens)
+    }
+    
+    init (_ ingredients:String, _ ingredientWordToIndex:[String:Int]) {
+        let wordsArray = ingredients.split(separator: " ").map(String.init)
+        let inputList = tokenizer(wordsArray, ingredientWordToIndex)
+        
+        guard let input_data = try? MLMultiArray(shape: [80,1,1], dataType: .double) else {
+            fatalError("Unexpected runtime error. MLMultiArray")
+        }
+        
+        for (index,item) in inputList.enumerated() {
+            input_data[index] = item
+        }
+        
+        ingredientData = input_data
+        
+        print(inputList)
+    }
+    
+    public var featureNames : Set<String> {
+        get {
+            return ["ingredients"]
+        }
+    }
+    
+    /// Returns nil if the provided featureName is not in the set of featureNames
+    public func featureValue(for featureName: String) -> MLFeatureValue?{
+        if featureName == "ingredients" && ingredientData != nil {
+            return MLFeatureValue(multiArray: ingredientData!)
+        }
+        return nil
+    }
+    
+}
+
 class PredictController: SharedController {
     
-    var model:VNCoreMLModel? = nil
+    var healthModel:MLModel? = nil
     var ocrModel:VNCoreMLModel? = nil
+    var ingredientWordToIndex = [String:Int]()
     
     func loadModels() {
         do {
             // The OCR model converts image of character into a character
-            let modelURL = URL(fileURLWithPath: String(bundlePath:"bundle://Assets/predict/ocr.mlmodel"))
-            let compiledUrl = try MLModel.compileModel(at: modelURL)
-            let model = try MLModel(contentsOf: compiledUrl)
-            self.ocrModel = try? VNCoreMLModel(for: model)
+            let ocrModelURL = URL(fileURLWithPath: String(bundlePath:"bundle://Assets/predict/ocr.mlmodel"))
+            let ocrCompiledUrl = try MLModel.compileModel(at: ocrModelURL)
+            let ocrModel = try MLModel(contentsOf: ocrCompiledUrl)
+            self.ocrModel = try? VNCoreMLModel(for: ocrModel)
+            
+            // the health model converts an ingredient string to a health score
+            let healthModelURL = URL(fileURLWithPath: String(bundlePath:"bundle://Assets/predict/ingredients.mlmodel"))
+            let healthCompiledUrl = try MLModel.compileModel(at: healthModelURL)
+            self.healthModel = try MLModel(contentsOf: healthCompiledUrl)
+            
+            
+            // load in the ingredient word to index look up table
+            do {
+                let ingredientsWordListURL = URL(fileURLWithPath: String(bundlePath:"bundle://Assets/predict/words.txt"))
+                let ingredientsWordListString = try String(contentsOf: ingredientsWordListURL, encoding: .utf8)
+                let ingredientsWordList = ingredientsWordListString.split(separator: "\n")
+                
+                var idx = 1
+                for word in ingredientsWordList {
+                    ingredientWordToIndex[String(word)] = idx
+                    idx += 1
+                }
+            }
+            catch {/* error handling here */}
+            
         } catch {
             print(error)
         }
@@ -51,8 +131,31 @@ class PredictController: SharedController {
                 print(error)
             }
         }
-            
+    
+        finalString = finalString.replacingOccurrences(of: " ", with: "").lowercased()
+        finalString = finalString.replacingOccurrences(of: ",", with: " ").lowercased()
         print(finalString)
+        ocrResults.label.text = finalString
+        
+        
+        // Clear up the OCR results
+        // 1. Check each ingredients against our ingredients dictionary, if its close enough assume that is the word
+        
+        
+        
+        // Predict against the ingredients model to discover the health score
+        if let healthModel = self.healthModel {
+            do {
+                let source = HealthModelSource(finalString, ingredientWordToIndex)
+                let prediction = try healthModel.prediction(from: source)
+                if let result = prediction.featureValue(for: "health") {
+                    predictionResults.label.text = String(format:"Health Factor: %d", Int(result.multiArrayValue![0].doubleValue * 100.0))
+                }
+                
+            } catch {
+                print(error)
+            }
+        }
         
     }
     
@@ -103,8 +206,11 @@ class PredictController: SharedController {
     fileprivate var nextObservation: Button {
         return mainXmlView!.elementForId("nextObservation")!.asButton!
     }
-    fileprivate var predictionLabel: Label {
-        return mainXmlView!.elementForId("predictionLabel")!.asLabel!
+    fileprivate var ocrResults: Label {
+        return mainXmlView!.elementForId("ocrResults")!.asLabel!
+    }
+    fileprivate var predictionResults: Label {
+        return mainXmlView!.elementForId("predictionResults")!.asLabel!
     }
     fileprivate var buttonsContainer: View {
         return mainXmlView!.elementForId("buttonsContainer")!.asView!

@@ -7,15 +7,20 @@
     
     <ImageView id="preview" contentMode="scaleAspectFit" backgroundColor="#000000FF" shadowRadius="4" shadowOffset="0,3" shadowColor="#000000FF" shadowOpacity="0.5" />
     <Constraint firstItem="preview" firstAttribute="width" secondItem="root" secondAttribute="width" multiplier="1.0"/>
-    <Constraint firstItem="preview" firstAttribute="height" secondItem="root" secondAttribute="height" constant="-150"/>
+    <Constraint firstItem="preview" firstAttribute="height" secondItem="root" secondAttribute="height" multiplier="0.33"/>
     <Constraint firstItem="preview" firstAttribute="top" secondItem="root" secondAttribute="top" constant="60" />
     
-    <StackView id="stack4" backgroundColor="#CCCCCCFF" distribution="equalSpacing" alignment="top" >
-        
-    </StackView>
-    <Constraint firstItem="stack4" firstAttribute="top" secondItem="preview" secondAttribute="bottom" constant="15" />
-    <Constraint firstItem="stack4" firstAttribute="left" secondItem="root" secondAttribute="left" constant="10"/>
-    <Constraint firstItem="stack4" firstAttribute="right" secondItem="root" secondAttribute="right" constant="-10"/>
-    <Constraint firstItem="stack4" firstAttribute="height" constant="60" />
+    <Label id="ocrResults" styleId="ResultsLabel" numberOfLines="99" />
+    <Constraint firstItem="ocrResults" firstAttribute="width" secondItem="root" secondAttribute="width" multiplier="1.0"/>
+    <Constraint firstItem="ocrResults" firstAttribute="height" secondItem="root" secondAttribute="height" multiplier="0.33"/>
+    <Constraint firstItem="ocrResults" firstAttribute="top" secondItem="preview" secondAttribute="bottom" />
+    <Constraint firstItem="ocrResults" firstAttribute="left" secondItem="preview" secondAttribute="left" />
+
+    <Label id="predictionResults" styleId="ResultsLabel" numberOfLines="99" />
+    <Constraint firstItem="predictionResults" firstAttribute="width" secondItem="root" secondAttribute="width" multiplier="1.0"/>
+    <Constraint firstItem="predictionResults" firstAttribute="height" secondItem="root" secondAttribute="height" multiplier="0.33"/>
+    <Constraint firstItem="predictionResults" firstAttribute="top" secondItem="ocrResults" secondAttribute="bottom" />
+    <Constraint firstItem="predictionResults" firstAttribute="left" secondItem="ocrResults" secondAttribute="left" />
+
 
 </Scene>
