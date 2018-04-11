@@ -21,7 +21,7 @@ def cnn_model(justTheImage=False):
 	model.add(Dropout(0.25))
 
 	model.add(Flatten())
-	model.add(Dense(512, activation='relu'))
+	model.add(Dense(784, activation='relu'))
 	model.add(Dense(len(train.ALPHABET), activation='softmax'))
 	
 	print(model.summary())

@@ -20,6 +20,10 @@ class SharedController: PlanetViewController, CameraCaptureHelperDelegate {
         // override in subclass
     }
     
+    func newImageAvailable () {
+        // override in subclass
+    }
+    
     func clearObservations() {
         observationsToProcess.removeAll()
         lastImageUsedForObservations = nil
@@ -31,6 +35,8 @@ class SharedController: PlanetViewController, CameraCaptureHelperDelegate {
             
             
             if observationsToProcess.count == 0 {
+                
+                newImageAvailable()
                 
                 if overrideImage != nil {
                     lastOriginalImage = overrideImage!
@@ -143,7 +149,7 @@ class SharedController: PlanetViewController, CameraCaptureHelperDelegate {
     var currentOverrideImageIndex = 0
     
     override func viewDidLoad() {
-        overrideImage = CIImage(contentsOf: URL(fileURLWithPath: String(bundlePath: "bundle://Assets/predict/debug/IMG_0000.JPG")))
+        overrideImage = CIImage(contentsOf: URL(fileURLWithPath: String(bundlePath: "bundle://Assets/predict/debug/IMG_0042.JPG")))
         
         if(overrideImage != nil) {
             navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Next", style: .plain, target: self, action: #selector(nextOverrideImage))

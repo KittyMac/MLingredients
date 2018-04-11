@@ -76,7 +76,7 @@ def Learn():
 	# 3. Train the CNN on the samples
 	cnn_model = model.cnn_model()
 	
-	for iteration in range(0,3):
+	for iteration in range(0,5):
 		print("*** iteration ", iteration)
 		cnn_model.fit(total_imgs, total_labels,
 			batch_size=32,

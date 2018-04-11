@@ -38,11 +38,13 @@ def four_point_transform(image, pts, size):
  
 	return warped
 
-def GenerateImage(text, fontIdx=0, img_w=model.IMG_SIZE[1], img_h=model.IMG_SIZE[0]):	
+def GenerateImage(text, fontIdx=0, inverted=False, img_w=model.IMG_SIZE[1], img_h=model.IMG_SIZE[0]):	
 	surface = cairo.ImageSurface(cairo.FORMAT_ARGB32, img_w, img_h)
 	
 	with cairo.Context(surface) as context:
 		context.set_source_rgb(1, 1, 1)  # White
+		if inverted:
+			context.set_source_rgb(0, 0, 0)  # Black
 		context.paint()
 		
 		box = [0,0,img_w-5, img_h-5]
@@ -62,6 +64,9 @@ def GenerateImage(text, fontIdx=0, img_w=model.IMG_SIZE[1], img_h=model.IMG_SIZE
 			context.move_to(origin_x, origin_y)
 			#context.move_to(top_left_x - int(box[0]), top_left_y - int(box[1]))
 			context.set_source_rgb(0, 0, 0)
+			if inverted:
+				context.set_source_rgb(1, 1, 1)  # Black
+			
 			context.show_text(text)
 	
 	buf = surface.get_data()
@@ -103,7 +108,8 @@ def SaveImageToTraining(img, label):
 	
 for i in range(0,50):
 	for x in train.ALPHABET:
-		SaveImageToTraining(GenerateImage(x, i), x)
+		SaveImageToTraining(GenerateImage(x, i, False), x)
+		SaveImageToTraining(GenerateImage(x, i, True), x)
 
 
 

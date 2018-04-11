@@ -18,8 +18,8 @@ def create_model(vocabularySize):
 
 	model.add(Activation('sigmoid'))    
 
-	model.compile(loss='mse',
-	              optimizer='adadelta',
+	model.compile(loss='binary_crossentropy',
+	              optimizer='adam',
 	              metrics=['accuracy'])
 
 	return model

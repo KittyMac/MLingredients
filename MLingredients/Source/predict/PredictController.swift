@@ -67,7 +67,14 @@ class PredictController: SharedController {
     var ocrModel:VNCoreMLModel? = nil
     var ingredientWordToIndex = [String:Int]()
     
+    func exactTranslation(_ word:String) -> Bool {
+        return ingredientWordToIndex[word] != nil
+    }
+    
     func bestGuessTranslation(_ word:String) -> String? {
+        if exactTranslation(word) {
+            return word
+        }
         
         // do an ngram comparison against all words in the word list, find the closest word
         // and if it is below a certain threshold return it.  otherwise return nil
@@ -121,7 +128,14 @@ class PredictController: SharedController {
         }
     }
     
+    override func newImageAvailable () {
+        print("newImageAvailable")
+    }
+    
     override func newObservationsAvailable () {
+        
+        print("newObservationsAvailable 1")
+        
         self.preview.imageView.image = UIImage(ciImage: lastOriginalImage!)
         
         // run through all obersvations and process them immediately, showing the OCR'd results
@@ -152,7 +166,7 @@ class PredictController: SharedController {
                 print(error)
             }
         }
-    
+        
         finalString = finalString.replacingOccurrences(of: "  ", with: " ").lowercased()
         finalString = finalString.replacingOccurrences(of: "  ", with: " ").lowercased()
         finalString = finalString.replacingOccurrences(of: "  ", with: " ").lowercased()
@@ -165,6 +179,8 @@ class PredictController: SharedController {
         // Run each ingredients against our ingredients dictionary, if the word is slightly mispelled (for example "mlk" instead of "milk") then go ahead
         // and assume that is the word we want to use
         
+        print("newObservationsAvailable 2")
+        
         let wordList = finalString.split(separator: " ")
         var convertedWordList:[String] = []
         
@@ -176,12 +192,12 @@ class PredictController: SharedController {
                 convertedWordList.append(bestGuess)
                 i += 1
                 continue
-            } else if i+1 < wordList.count {
+            } else if i+1 < wordList.count && exactTranslation(String(wordList[i+1])) == false {
                 if let bestGuess = bestGuessTranslation(String(wordList[i]) + String(wordList[i+1])) {
                     convertedWordList.append(bestGuess)
                     i += 2
                     continue
-                } else if i+2 < wordList.count {
+                } else if i+2 < wordList.count && exactTranslation(String(wordList[i+2])) == false {
                     if let bestGuess = bestGuessTranslation(String(wordList[i]) + String(wordList[i+1]) + String(wordList[i+2])) {
                         convertedWordList.append(bestGuess)
                         i += 3
@@ -195,11 +211,16 @@ class PredictController: SharedController {
         
         finalString = convertedWordList.joined(separator:" ")
         
+        print(finalString)
+        
         if finalString.count == 0 {
             
             cleanedOCRResults.label.text = "No Ingredients Recognized"
         
         } else {
+            
+            print("newObservationsAvailable 3")
+            
             cleanedOCRResults.label.text = finalString
             
             // Check to see if we have recognized ANY of the ingredients in the listing; if we have not, no point in
@@ -223,6 +244,8 @@ class PredictController: SharedController {
         if overrideImage == nil {
             clearObservations()
         }
+        
+        print("newObservationsAvailable 4")
     }
     
     override func viewDidLoad() {
