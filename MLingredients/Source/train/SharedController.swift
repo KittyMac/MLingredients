@@ -149,7 +149,7 @@ class SharedController: PlanetViewController, CameraCaptureHelperDelegate {
     var currentOverrideImageIndex = 0
     
     override func viewDidLoad() {
-        overrideImage = CIImage(contentsOf: URL(fileURLWithPath: String(bundlePath: "bundle://Assets/predict/debug/IMG_0042.JPG")))
+        overrideImage = CIImage(contentsOf: URL(fileURLWithPath: String(bundlePath: "bundle://Assets/predict/debug/IMG_0049.JPG")))
         
         if(overrideImage != nil) {
             navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Next", style: .plain, target: self, action: #selector(nextOverrideImage))

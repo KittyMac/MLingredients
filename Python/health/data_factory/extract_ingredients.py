@@ -10,7 +10,7 @@ import operator
 
 
 # ingredients needs to report more than this many times to be included
-ingredientFrequencyThreshold = 4
+ingredientFrequencyThreshold = 3
 
 # ingredient names must be longer than this
 ingredientStringLengthMininum = 4

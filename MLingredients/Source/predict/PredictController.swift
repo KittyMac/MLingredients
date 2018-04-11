@@ -181,6 +181,9 @@ class PredictController: SharedController {
         
         print("newObservationsAvailable 2")
         
+        // manully remove ingredients label
+        finalString = finalString.replacingOccurrences(of: "ingredients", with: "")
+        
         let wordList = finalString.split(separator: " ")
         var convertedWordList:[String] = []
         
@@ -210,6 +213,9 @@ class PredictController: SharedController {
         }
         
         finalString = convertedWordList.joined(separator:" ")
+        
+        // manully remove ingredients label
+        finalString = finalString.replacingOccurrences(of: "ingredients", with: "")
         
         print(finalString)
         

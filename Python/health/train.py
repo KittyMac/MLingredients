@@ -68,8 +68,10 @@ def Learn():
 	
 	
 	# add some base truth ( a product with all unrecognized ingredients is worht 0 health? )
-	trainingInput.append([])
-	trainingOutput.append(0)
+	#trainingInput.append([])
+	#trainingOutput.append(0)
+	
+	
 	
 	
 	# pad all of our input sentences to maximum sentence length
@@ -79,15 +81,31 @@ def Learn():
 	
 	
 	# 5. train model on word index arrays with expected normalized health output (note: health value of 0 should be skipped)
-	for i in range(0,10):
+	for i in range(0,5):
 		_model.fit(trainingInput, trainingOutput,
 	        batch_size=32,
 	        epochs=10,
 	        shuffle=True,
 	        verbose=1,
-			validation_split = 0.1
 	        )
 	
+	
+	customCheck = []
+	customCheck.append(tokenize("ingredients chickenstock modifiedfoodstarch vegetableoil wheatflour cream rennet chickenfat containslessthan2% salt} wheat mechanicallyseparatedchicken monosodiumglutamate soyproteinconcentrate water flavoring vegetableoil beets soyproteinisolate sodiumphosphate chicken celeryextract sunfloweroil butter cream annatto dehydrated", ingredientWordToIndex))
+	customCheck.append(tokenize("chickenstock modifiedfoodstarch vegetableoil wheatflour cream rennet chickenfat containslessthan2% salt} wheat mechanicallyseparatedchicken monosodiumglutamate soyproteinconcentrate water flavoring vegetableoil beets soyproteinisolate sodiumphosphate chicken celeryextract sunfloweroil butter cream annatto dehydrated", ingredientWordToIndex))
+	customCheck.append(tokenize("chickenstock modifiedfoodstarch vegetableoil wheatflour cream rennet chickenfat containslessthan2% salt} wheat mechanicallyseparatedchicken monosodiumglutamate soyproteinconcentrate water flavoring vegetableoil soyproteinisolate sodiumphosphate chicken celeryextract sunfloweroil butter cream annatto dehydrated", ingredientWordToIndex))
+	customCheck.append(tokenize("chickenstock modifiedfoodstarch vegetableoil wheatflour cream chickenfat containslessthan2% salt} wheat mechanicallyseparatedchicken monosodiumglutamate soyproteinconcentrate water flavoring vegetableoil soyproteinisolate sodiumphosphate chicken celeryextract sunfloweroil butter cream annatto dehydrated", ingredientWordToIndex))
+	customCheck.append(tokenize("soyproteinconcentrate water flavoring vegetableoil soyproteinisolate sodiumphosphate chicken celeryextract sunfloweroil butter cream annatto", ingredientWordToIndex))
+	customCheck.append(tokenize("chicken celeryextract sunfloweroil butter cream annatto ", ingredientWordToIndex))
+	customCheck.append(tokenize("soyproteinconcentrate water flavoring vegetableoil soyproteinisolate sodiumphosphate", ingredientWordToIndex))
+	customCheck.append(tokenize("chickenstock modifiedfoodstarch vegetableoil wheatflour cream chickenfat containslessthan2% salt} wheat mechanicallyseparatedchicken monosodiumglutamate", ingredientWordToIndex))
+	
+	
+	customCheck = sequence.pad_sequences(customCheck, maxlen=model.MAX_LEN)
+	
+	customCheck = _model.predict(customCheck)
+	for i in range(0,len(customCheck)):
+		print(customCheck[i], "CUSTOM CHECK "+str(i))
 	
 	# 6. predict against some of our unlabelled products to see how well it does?
 	predictions = _model.predict(unlabeledInput)
